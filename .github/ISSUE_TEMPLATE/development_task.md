@@ -1,5 +1,5 @@
 ---
-name: Development task
+name: Development task 👷
 about: Create a detailed development task
 title: ''
 labels: ''
