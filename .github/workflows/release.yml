@@ -1,0 +1,43 @@
+name: GitHub Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: 'Version for new tag and subsequent release'
+        required: true
+        type: string
+
+jobs:
+  create-release:
+    name: Create new release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create tag
+        if: ${{ inputs.releaseVersion != null }}
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ inputs.releaseVersion }}
+
+      - name: Create changelog text
+        id: changelog
+        uses: loopwerk/tag-changelog@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: .github/changelog_config.js
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ inputs.releaseVersion || github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
