@@ -1,0 +1,14 @@
+parameters:
+    level: 8
+    paths:
+        - src/
+    symfony:
+        container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
+    scanDirectories:
+        - var/cache/dev/Symfony/Config
+
+    type_coverage:
+        return_type: 100
+        param_type: 100
+        property_type: 100
+        print_suggestions: false
