@@ -66,6 +66,10 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
+        "code-checks": [
+            "@phpstan",
+            "@phpcs-check"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],

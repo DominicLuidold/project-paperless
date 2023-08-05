@@ -11,7 +11,7 @@ USER_UID=$(shell id -u)
 
 # Makefile config
 .DEFAULT_GOAL:=help
-.PHONY: start debug stop enter-backend rebuild setup help
+.PHONY: start debug stop enter-backend rebuild setup install-git-hooks run-code-checks help
 
 ## Docker stack
 start: ## Build and start the Docker stack.
@@ -33,6 +33,13 @@ rebuild: ## Forces a rebuild of the custom Docker images.
 ## Setup
 setup: ## Run the `/backend/bin/setup.sh` script in the backend container.
 	@docker exec -it ${PROJECT_NAME}-backend-1 /var/www/app/bin/setup.sh || true
+
+install-git-hooks: ## Install project-specific Git hooks.
+	@ln -fs ./../../git-hooks/pre-commit ./.git/hooks/pre-commit
+
+## Misc
+run-code-checks: ## Run checks on code (style, types, dependencies).
+	@docker exec ${PROJECT_NAME}-backend-1 composer code-check || (echo "Running code checks failed."; exit 1)
 
 ## Help
 help: ## Show available commands.

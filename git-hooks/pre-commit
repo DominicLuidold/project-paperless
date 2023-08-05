@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+echo "# Running code checks ..."
+make run-code-checks
+echo "# Done!"
