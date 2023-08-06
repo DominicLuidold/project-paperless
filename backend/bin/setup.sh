@@ -16,7 +16,7 @@ echo "# Setting up development database ..."
 bin/console doctrine:database:drop --force --if-exists
 bin/console doctrine:database:create --no-interaction
 bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
-bin/console doctrine:fixtures:load --no-interaction
+# bin/console doctrine:fixtures:load --no-interaction
 
 echo "# Setting up test database ..."
 mkdir -p ./var/data

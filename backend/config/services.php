@@ -11,6 +11,5 @@ return static function (ContainerConfigurator $container): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('App\\', '../src/App/*')
-        ->exclude([]); // TODO
+    $services->load('App\\', '../src/App/*');
 };
