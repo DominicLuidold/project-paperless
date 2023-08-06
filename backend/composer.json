@@ -43,6 +43,8 @@
         "rector/rector": "^0.17.10",
         "roave/security-advisories": "dev-latest",
         "symfony/phpunit-bridge": "^6.3",
+        "symfony/stopwatch": "6.3.*",
+        "symfony/web-profiler-bundle": "6.3.*",
         "tomasvotruba/type-coverage": "^0.2.0"
     },
     "config": {
