@@ -10,4 +10,5 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+    Fusonic\ApiDocumentationBundle\FusonicApiDocumentationBundle::class => ['all' => true],
 ];

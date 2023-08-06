@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-return function (RoutingConfigurator $routes) {
+return function (RoutingConfigurator $routes): void {
     $routes->add('app.swagger', '/api/docs.json')
         ->methods(['GET'])
         ->controller('nelmio_api_doc.controller.swagger');

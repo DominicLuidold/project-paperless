@@ -71,6 +71,9 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "fusonic/api-documentation-bundle": {
+        "version": "0.0.9"
+    },
     "nelmio/api-doc-bundle": {
         "version": "4.12",
         "recipe": {
