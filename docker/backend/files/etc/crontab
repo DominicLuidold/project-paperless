@@ -1,0 +1,3 @@
+0 0 * * * www-data echo "$(date --rfc-3339=seconds) - cron job" >> /var/www/app/var/log/crontab.log
+
+# Make sure the crontab file ends on an empty line!
