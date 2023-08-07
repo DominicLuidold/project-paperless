@@ -11,5 +11,5 @@ return static function (NelmioApiDocConfig $nelmioApiDoc): void {
             'description' => 'API documentation for Project Paperless',
         ]);
 
-    $nelmioApiDoc->areas('default', ['path_patterns' => ['^/api(?!/docs)']]);
+    $nelmioApiDoc->areas('default', ['path_patterns' => ['^/api(?!/doc)']]);
 };
