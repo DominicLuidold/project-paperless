@@ -14,13 +14,13 @@ As a `persona`, I `want to`, `so that`.
 A clear and concise description of what the task is.
 
 **Specifications**
-- Specification #1
-- Specification #2
+- Specification 1
+- Specification 2
 
 **Acceptance criteria**
-- [ ] Criteria #1
+- [ ] Criteria 1
   - [ ] Sub-criteria
-- [ ] Criteria #2
+- [ ] Criteria 2
 
 **Out of scope**
 - Functionality x
