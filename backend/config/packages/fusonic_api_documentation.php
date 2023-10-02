@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Fusonic\HttpKernelExtensions\Attribute\FromRequest;
+use Fusonic\HttpKernelBundle\Attribute\FromRequest;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $container): void {

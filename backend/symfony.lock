@@ -74,6 +74,9 @@
     "fusonic/api-documentation-bundle": {
         "version": "0.0.9"
     },
+    "fusonic/http-kernel-bundle": {
+        "version": "1.0.0"
+    },
     "nelmio/api-doc-bundle": {
         "version": "4.12",
         "recipe": {
