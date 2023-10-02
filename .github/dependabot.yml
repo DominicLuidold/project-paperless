@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: misc
+    labels:
+      - 'type: technical'
+
+  - package-ecosystem: composer
+    directory: /backend
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: '06:30'
+    commit-message:
+      prefix: misc
+    labels:
+      - 'type: technical'
+    versioning-strategy: increase
+    groups:
+      symfony:
+        patterns:
+          - 'symfony/*'
+        exclude-patterns:
+          - symfony/flex
+          - symfony/monolog-bundle
+
+      doctrine:
+        patterns:
+          - 'doctrine/*'
+
+      phpstan:
+        patterns:
+          - 'phpstan/*'

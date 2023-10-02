@@ -7,9 +7,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Framework\Application\Messenger\CommandHandlerInterface;
 use Framework\Application\Messenger\EventHandlerInterface;
 use Framework\Application\Messenger\QueryHandlerInterface;
-use Fusonic\DDDExtensions\Doctrine\EventSubscriber\DomainEventSubscriber;
-use Fusonic\HttpKernelExtensions\Controller\RequestDtoResolver;
-use Fusonic\HttpKernelExtensions\Normalizer\ConstraintViolationExceptionNormalizer;
+use Fusonic\DDDExtensions\Doctrine\LifecycleListener\DomainEventLifecycleListener;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
@@ -45,14 +43,10 @@ return static function (ContainerConfigurator $container): void {
 
     $services->load('Framework\\', '../src/Framework/*');
 
-    $services->set(RequestDtoResolver::class)
-        ->tag('controller.argument_value_resolver', ['priority' => 50])
-        ->arg('$providers', tagged_iterator('fusonic.http_kernel_extensions.context_aware_provider'));
-
-    $services->set(ConstraintViolationExceptionNormalizer::class)
-        ->arg('$normalizer', service('serializer.normalizer.constraint_violation_list'));
-
-    $services->set(DomainEventSubscriber::class)
+    $services->set(DomainEventLifecycleListener::class)
         ->arg('$bus', service('event.bus'))
-        ->tag('doctrine.event_subscriber');
+        ->tag('doctrine.event_listener', ['event' => 'postPersist', 'priority' => 500])
+        ->tag('doctrine.event_listener', ['event' => 'postUpdate', 'priority' => 500])
+        ->tag('doctrine.event_listener', ['event' => 'postRemove', 'priority' => 500])
+        ->tag('doctrine.event_listener', ['event' => 'postFlush', 'priority' => 500]);
 };
