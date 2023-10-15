@@ -39,7 +39,9 @@ install-git-hooks: ## Install project-specific Git hooks.
 
 ## Misc
 run-code-checks: ## Run checks on code (style, types, dependencies).
-	@docker exec ${PROJECT_NAME}-backend-1 composer code-check || (echo "Running code checks failed."; exit 1)
+	@if ! git diff --quiet ./backend; then \
+		docker exec ${PROJECT_NAME}-backend-1 composer code-check || (echo "Running code checks failed."; exit 1); \
+	fi
 
 ## Help
 help: ## Show available commands.
