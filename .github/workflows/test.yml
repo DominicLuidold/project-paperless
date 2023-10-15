@@ -1,0 +1,96 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  php_codestyle:
+    name: PHP Codestyle
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup dependencies
+        uses: ./.github/workflows/common/composer-install
+
+      - name: Check codestyle
+        run: composer phpcs-check
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup dependencies
+        uses: ./.github/workflows/common/composer-install
+        with:
+          run-scripts: true # Required to generate Symfony config cache files
+
+      - name: Analyse code
+        run: composer phpstan
+
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+      env:
+        APP_ENV: test
+        XDEBUG_MODE: coverage
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup dependencies
+        uses: ./.github/workflows/common/composer-install
+
+      - name: Prepare test setup
+        run: |
+          mkdir -p var/data
+          touch var/data/app.db
+          bin/console doctrine:database:create --no-interaction --env=test
+          bin/console doctrine:schema:update --force --env=test
+
+      - name: Run tests
+        run: vendor/bin/phpunit --coverage-clover coverage.xml
+
+  php-security:
+    name: PHP Security
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Symfony security check
+        run: symfony security:check
+
+      - name: Run Composer audit
+        run: composer audit --locked
