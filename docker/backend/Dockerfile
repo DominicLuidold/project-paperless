@@ -11,7 +11,7 @@ RUN apt update && \
     apt install -y --no-install-recommends supervisor cron curl && \
     # PHP extensions
     chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions intl opcache pdo_pgsql redis zip && \
+    install-php-extensions intl opcache pdo_pgsql redis-^6 zip && \
     # Make www-data's home dir writable
     chown www-data:www-data /var/www && \
     # Make cron run with non-root
@@ -38,10 +38,10 @@ ARG USER_UID
 
 RUN apt update && \
     # PHP extensions
-    install-php-extensions @composer xdebug && \
+    install-php-extensions @composer xdebug-^3 && \
     # Symfony CLI
-    curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' |  bash && \
-    apt install -y --no-install-recommends symfony-cli  && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash && \
+    apt install -y --no-install-recommends symfony-cli && \
     # Set same user id as local user
     usermod --uid ${USER_UID} www-data && \
     # Set root password to enable `su`
@@ -55,3 +55,19 @@ COPY ./docker/backend/files/usr/local/etc/php-fpm.d/zz-development.conf /usr/loc
 USER www-data
 
 ENTRYPOINT /bin/entrypoint.sh
+
+FROM development as cli
+
+ARG USER_UID
+
+USER root
+
+RUN \
+   # Set PHP memory limit and execution time. Analyzers like PHPStan or PHPUnit tests can use more than the default limits
+   cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+   sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" -e "s/^ *max_execution_time.*/max_execution_time = 0/g" /usr/local/etc/php/php.ini && \
+   # Cleanup
+   docker-php-source delete && \
+   rm -fR /tmp/* && rm -fR /var/lib/apt/lists/*
+
+ENTRYPOINT ""

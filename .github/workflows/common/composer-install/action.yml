@@ -1,0 +1,38 @@
+name: Composer setup
+description: Setup, install and cache Composer dependencies
+
+inputs:
+  run-scripts:
+    description: Whether to omit the '--no-scripts' flag when installing dependencies
+    required: true
+    type: boolean
+    default: false
+
+runs:
+  using: composite
+  steps:
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        cd ./backend
+        echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-Composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-Composer-${{ hashFiles('**/composer.lock') }}
+          ${{ runner.os }}-Composer-
+
+    - name: Install dependencies
+      run: |
+        cd ./backend
+        if ${{ inputs.run-scripts }} == true; then
+          composer install --prefer-dist --no-interaction
+        else
+          composer install --prefer-dist --no-interaction --no-scripts
+        fi
+      shell: bash
