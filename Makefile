@@ -15,10 +15,10 @@ USER_UID=$(shell id -u)
 
 ## Docker stack
 start: ## Build and start the Docker stack.
-	@docker compose -f ./docker/docker-compose.development.yml -p ${PROJECT_NAME} up -d --build
+	@docker compose -f ./docker/compose.yaml -p ${PROJECT_NAME} up -d --build
 
 debug: ## Build and start the Docker stack with debugging enabled.
-	@XDEBUG_MODE=debug docker compose -f ./docker/docker-compose.development.yml -p ${PROJECT_NAME} up -d --build
+	@XDEBUG_MODE=debug docker compose -f ./docker/compose.yaml -p ${PROJECT_NAME} up -d --build
 
 stop: ## Stop the Docker stack.
 	@docker compose -p ${PROJECT_NAME} down
@@ -28,7 +28,7 @@ enter-backend: ## Enter the backend container.
 
 ## Build
 rebuild: ## Forces a rebuild of the custom Docker images.
-	@docker compose -f ./docker/docker-compose.development.yml build --no-cache
+	@docker compose -f ./docker/compose.yaml build --no-cache
 
 ## Setup
 setup: ## Run the `/backend/bin/setup.sh` script in the backend container.
