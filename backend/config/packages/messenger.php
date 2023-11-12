@@ -17,10 +17,10 @@ return static function (FrameworkConfig $framework): void {
         ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
         ->options(['queue_name' => 'async', 'auto_setup' => false])
         ->retryStrategy()
-        ->maxRetries(3)
-        ->delay(1000)
-        ->maxDelay(0)
-        ->multiplier(10);
+            ->maxRetries(3)
+            ->delay(1000)
+            ->maxDelay(0)
+            ->multiplier(10);
 
     $messenger->transport('failed')
         ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')

@@ -1,9 +1,9 @@
-| Q             | A
-| ------------- | ---
-| Bug fix?      | yes/no
-| New feature?  | yes/no
-| Issues        | Close #... <!-- prefix each issue number with "Close #" -->
-| License       | MIT
+| Q            | A
+| ------------ | ---
+| Bug fix?     | yes/no
+| New feature? | yes/no
+| Issues       | Close #... <!-- prefix each issue number with "Close #" -->
+| License      | MIT
 
 <!--
 Replace this notice by a description of your feature/bug fix.
