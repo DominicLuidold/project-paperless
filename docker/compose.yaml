@@ -54,5 +54,12 @@ services:
     redis:
         image: redis:${REDIS_VERSION}-alpine
 
+    redis-commander:
+        image: rediscommander/redis-commander:latest
+        ports:
+            - "8484:8081"
+        environment:
+            REDIS_HOSTS: local:redis:6379
+
 volumes:
     data-postgres:
