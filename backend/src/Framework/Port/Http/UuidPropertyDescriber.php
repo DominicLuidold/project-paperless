@@ -7,7 +7,6 @@ namespace Framework\Port\Http;
 use Nelmio\ApiDocBundle\PropertyDescriber\NullablePropertyTrait;
 use Nelmio\ApiDocBundle\PropertyDescriber\PropertyDescriberInterface;
 use OpenApi\Annotations\Schema;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Uid\Uuid;
 
 final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
@@ -26,7 +25,6 @@ final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
     public function supports(array $types): bool
     {
         return 1 === \count($types)
-            && is_a($types[0], Type::class)
             && null !== $types[0]->getClassName()
             && is_a($types[0]->getClassName(), Uuid::class, true);
     }
