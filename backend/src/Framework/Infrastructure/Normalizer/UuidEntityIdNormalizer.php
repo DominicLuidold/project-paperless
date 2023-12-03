@@ -11,9 +11,12 @@ use Symfony\Component\Uid\Uuid;
 
 final readonly class UuidEntityIdNormalizer implements NormalizerInterface, DenormalizerInterface
 {
+    /**
+     * @param mixed|UuidEntityId $object
+     */
     public function normalize(mixed $object, string $format = null, array $context = []): string
     {
-        return $object->getValue();
+        return $object->getValue()->toRfc4122();
     }
 
     /**
