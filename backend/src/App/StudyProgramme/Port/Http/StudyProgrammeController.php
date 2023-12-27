@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\StudyProgramme\Port\Http;
 
+use App\StudyProgramme\Application\Message\Query\GetAllStudyProgrammesQuery;
 use App\StudyProgramme\Application\Message\Query\GetStudyProgrammeQuery;
+use App\StudyProgramme\Application\Message\Response\PaginatedStudyProgrammeResponse;
 use App\StudyProgramme\Application\Message\Response\StudyProgrammeResponse;
 use Framework\Port\Http\ControllerResponseTrait;
 use Fusonic\ApiDocumentationBundle\Attribute\DocumentedRoute;
@@ -28,6 +30,14 @@ final class StudyProgrammeController extends AbstractController
         SerializerInterface $serializer,
     ) {
         $this->serializer = $serializer;
+    }
+
+    #[DocumentedRoute(path: '', methods: 'GET', output: PaginatedStudyProgrammeResponse::class)]
+    public function getAll(#[FromRequest] GetAllStudyProgrammesQuery $query): Response
+    {
+        $envelope = $this->queryBus->dispatch($query);
+
+        return $this->createJsonResponseFromEnvelope($envelope);
     }
 
     #[DocumentedRoute(path: '/{id}', methods: 'GET', output: StudyProgrammeResponse::class)]
