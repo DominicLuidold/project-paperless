@@ -28,8 +28,8 @@ abstract class UuidEntityIdType extends Type
             return $platform->getGuidTypeDeclarationSQL($column);
         }
 
-        return $platform->getBinaryTypeDeclarationSQL([
-            'length' => 16,
+        return $platform->getStringTypeDeclarationSQL([
+            'length' => '16',
             'fixed' => true,
         ]);
     }
@@ -37,7 +37,7 @@ abstract class UuidEntityIdType extends Type
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if ($value instanceof UuidEntityId) {
-            return $this->hasNativeGuidType($platform) ? $value->getValue()->toRfc4122() : $value->getValue()->toBinary();
+            return $value->getValue()->toRfc4122();
         }
 
         if (!\is_string($value)) {
