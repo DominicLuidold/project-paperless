@@ -1,0 +1,13 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgramme" table="app_study_programmes"
+            repository-class="App\StudyProgramme\Infrastructure\Repository\StudyProgrammeDoctrineRepository">
+        <id name="id" type="study_programme_uuid"/>
+        <field name="name" type="translation_vo"/>
+        <field name="type" enum-type="App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgrammeType"/>
+        <field name="numberOfSemesters" type="integer"/>
+        <field name="code" unique="true"/>
+    </entity>
+</doctrine-mapping>
