@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\StudyProgramme\Port\Http;
 
 use App\StudyProgramme\Application\Message\Command\CreateStudyProgrammeCommand;
+use App\StudyProgramme\Application\Message\Command\UpdateStudyProgrammeCommand;
 use App\StudyProgramme\Application\Message\Query\GetAllStudyProgrammesQuery;
 use App\StudyProgramme\Application\Message\Query\GetStudyProgrammeQuery;
 use App\StudyProgramme\Application\Message\Response\PaginatedStudyProgrammeResponse;
@@ -57,5 +58,15 @@ final class StudyProgrammeController extends AbstractController
         $envelope = $this->commandBus->dispatch($command);
 
         return $this->createJsonResponseFromEnvelope($envelope, Response::HTTP_CREATED);
+    }
+
+    #[DocumentedRoute(path: '/{id}/update', methods: 'POST', output: StudyProgrammeResponse::class)]
+    #[OA\Response(response: Response::HTTP_NOT_FOUND, description: 'StudyProgramme not found')]
+    #[OA\Response(response: Response::HTTP_UNPROCESSABLE_ENTITY, description: 'Non-unique StudyProgramme code')]
+    public function update(#[FromRequest] UpdateStudyProgrammeCommand $command): Response
+    {
+        $envelope = $this->commandBus->dispatch($command);
+
+        return $this->createJsonResponseFromEnvelope($envelope);
     }
 }
