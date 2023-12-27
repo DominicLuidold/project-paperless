@@ -152,6 +152,47 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
         self::assertSame(422, $response['code']);
     }
 
+    public function testUpdateStudyProgramme(): void
+    {
+        $data = $this->getData();
+
+        $this->makeJsonRequest(
+            method: 'POST',
+            uri: '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID.'/update',
+            data: $data
+        );
+        self::assertResponseStatusCodeSame(200);
+        self::assertQueryCount(8);
+
+        $response = self::getJsonResponse();
+        self::assertArrayHasKey('id', $response);
+        self::assertSame($data['name'], $response['name']);
+        self::assertSame($data['type'], $response['type']);
+        self::assertSame($data['numberOfSemesters'], $response['numberOfSemesters']);
+        self::assertSame($data['code'], $response['code']);
+    }
+
+    public function testUpdateStudyProgrammeWithAlreadyExistingCode(): void
+    {
+        $data = $this->getData();
+        $data['code'] = StudyProgrammeFixtures::getData()[StudyProgrammeFixtures::STUDY_PROGRAMME_2_ID]['code'];
+
+        $this->makeJsonRequest(
+            method: 'POST',
+            uri: '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID.'/update',
+            data: $data
+        );
+        self::assertResponseStatusCodeSame(422);
+        self::assertQueryCount(5);
+
+        $response = self::getJsonResponse();
+        self::assertSame(
+            expected: 'An entity for class `StudyProgramme` with `code=0816` already exists.',
+            actual: $response['message']
+        );
+        self::assertSame(422, $response['code']);
+    }
+
     /**
      * @return array<string, int|string|array<string, string>>
      */
