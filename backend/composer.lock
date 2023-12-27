@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5e2c810a0a35ae63e6b4dab22dcd7f1",
+    "content-hash": "f2437866298f11a6ad721b21250f137f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -7868,7 +7868,7 @@
                 "funadmin/funadmin": "<=3.2|>=3.3.2,<=3.3.3",
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
-                "getgrav/grav": "<=1.7.42.1",
+                "getgrav/grav": "<1.7.44",
                 "getkirby/cms": "<3.5.8.3-dev|>=3.6,<3.6.6.3-dev|>=3.7,<3.7.5.2-dev|>=3.8,<3.8.4.1-dev|>=3.9,<3.9.6",
                 "getkirby/kirby": "<=2.5.12",
                 "getkirby/panel": "<2.5.14",

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Application\Messenger;
+namespace Framework\Application\Message;
 
 interface CommandHandlerInterface
 {

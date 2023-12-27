@@ -6,13 +6,9 @@ namespace App\StudyProgramme\Infrastructure\Repository;
 
 use App\Common\Domain\Id\StudyProgrammeId;
 use App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgramme;
-use App\StudyProgramme\Domain\Repository\StudyProgrammeRepositoryFilter;
 use App\StudyProgramme\Domain\Repository\StudyProgrammeRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
-use Framework\Infrastructure\Repository\QueryOptions;
 use Framework\Infrastructure\Repository\RepositoryTrait;
 
 /**
@@ -27,6 +23,15 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
         parent::__construct($registry, StudyProgramme::class);
 
         $this->entityManager = $this->getEntityManager();
+    }
+
+    public function findOneById(StudyProgrammeId $id): ?StudyProgramme
+    {
+        return $this->createQueryBuilder('studyProgramme')
+            ->andWhere('studyProgramme.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function findOneByCode(string $code): ?StudyProgramme
