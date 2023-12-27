@@ -20,4 +20,6 @@ interface StudyProgrammeRepositoryInterface
     public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array;
 
     public function countWithFilter(StudyProgrammeRepositoryFilter $filter): int;
+
+    public function saveEntity(StudyProgramme $entity): void;
 }

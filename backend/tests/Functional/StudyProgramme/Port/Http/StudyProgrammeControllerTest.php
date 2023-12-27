@@ -114,4 +114,57 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
         self::assertResponseStatusCodeSame(404);
         self::assertQueryCount(2);
     }
+
+    public function testCreateStudyProgramme(): void
+    {
+        $data = $this->getData();
+
+        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(201);
+        self::assertQueryCount(7);
+
+        $response = self::getJsonResponse();
+        self::assertArrayHasKey('id', $response);
+        self::assertSame($data['name'], $response['name']);
+        self::assertSame($data['type'], $response['type']);
+        self::assertSame($data['numberOfSemesters'], $response['numberOfSemesters']);
+        self::assertSame($data['code'], $response['code']);
+    }
+
+    public function testCreateStudyProgrammeWithAlreadyExistingCode(): void
+    {
+        $data = $this->getData();
+
+        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(201);
+        self::assertQueryCount(7);
+
+        self::$client->enableProfiler();
+        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(422);
+        self::assertQueryCount(4);
+
+        $response = self::getJsonResponse();
+        self::assertSame(
+            expected: 'An entity for class `StudyProgramme` with `code=01234` already exists.',
+            actual: $response['message']
+        );
+        self::assertSame(422, $response['code']);
+    }
+
+    /**
+     * @return array<string, int|string|array<string, string>>
+     */
+    private function getData(): array
+    {
+        return [
+            'name' => [
+                'de' => 'Beispiel Studiengang',
+                'en' => 'Sample Study Programme',
+            ],
+            'type' => 'MASTER',
+            'numberOfSemesters' => 4,
+            'code' => '01234',
+        ];
+    }
 }
