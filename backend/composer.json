@@ -112,6 +112,16 @@
             "@auto-scripts"
         ]
     },
+    "scripts-descriptions": {
+        "code-checks": "Runs PHP-CS-Fixer in dry-run mode, PHPStan, and Rector",
+        "phpstan": "Runs PHPStan",
+        "phpcs-check": "Runs PHP-CS-Fixer in dry-run mode",
+        "phpcs-fix": "Runs PHP-CS-Fixer",
+        "rector": "Runs Rector",
+        "test": "Runs PHPUnit",
+        "test:functional": "Runs PHPUnit with tests from the testsuite 'functional'",
+        "test:unit": "Runs PHPUnit with tests from the testsuite 'unit'"
+    },
     "conflict": {
         "symfony/symfony": "*"
     },
