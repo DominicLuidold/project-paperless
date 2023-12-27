@@ -37,7 +37,7 @@ final readonly class GetAllStudyProgrammesQueryHandler implements QueryHandlerIn
 
         return PaginatedStudyProgrammeResponse::fromData(
             data: array_map(
-                callback: static fn (StudyProgramme $studyProgramme) => StudyProgrammeResponse::fromEntity($studyProgramme),
+                callback: static fn (StudyProgramme $studyProgramme): StudyProgrammeResponse => StudyProgrammeResponse::fromEntity($studyProgramme),
                 array: $studyProgrammes,
             ),
             page: $query->page,

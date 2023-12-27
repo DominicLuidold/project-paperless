@@ -96,7 +96,8 @@
         },
         "code-checks": [
             "@phpcs-check",
-            "@phpstan"
+            "@phpstan",
+            "@rector --dry-run"
         ],
         "post-install-cmd": [
             "@auto-scripts"
