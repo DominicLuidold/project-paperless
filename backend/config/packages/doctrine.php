@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Framework\Infrastructure\Types\TranslationValueObjectType;
 use Symfony\Config\DoctrineConfig;
 
 return static function (DoctrineConfig $doctrine): void {
@@ -12,6 +13,9 @@ return static function (DoctrineConfig $doctrine): void {
                 'charset' => 'utf-8',
                 'driver' => 'pro_pqsl',
             ],
+        ],
+        'types' => [
+            TranslationValueObjectType::NAME => ['class' => TranslationValueObjectType::class],
         ],
     ]);
 
