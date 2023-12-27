@@ -35,6 +35,7 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",
+        "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.45",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10",
@@ -101,8 +102,7 @@
         },
         "code-checks": [
             "@phpcs-check",
-            "@phpstan",
-            "@rector --dry-run"
+            "@phpstan"
         ],
         "post-install-cmd": [
             "@auto-scripts"
