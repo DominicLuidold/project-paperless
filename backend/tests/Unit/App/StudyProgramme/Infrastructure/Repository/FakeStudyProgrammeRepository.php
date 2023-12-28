@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\StudyProgramme\Infrastructure\Repository;
+namespace App\Tests\Unit\App\StudyProgramme\Infrastructure\Repository;
 
 use App\Common\Domain\Id\StudyProgrammeId;
 use App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgramme;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\StudyProgramme\Port\Http;
+namespace App\Tests\Functional\App\StudyProgramme\Port\Http;
 
 use App\StudyProgramme\Infrastructure\DataFixtures\Test\StudyProgrammeFixtures;
 use App\Tests\Test\WebDatabaseTestCase;
