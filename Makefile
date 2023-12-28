@@ -23,7 +23,10 @@ debug: ## Build and start the Docker stack with debugging enabled.
 stop: ## Stop the Docker stack.
 	@docker compose -p ${PROJECT_NAME} down
 
-enter-backend: ## Enter the backend container.
+enter-node: ## Enter the frontend Node.js container.
+	@./docker/frontend/node-ci.sh || true
+
+enter-backend: ## Enter the backend PHP container.
 	@docker exec -it ${PROJECT_NAME}-backend-1 /bin/bash || true
 
 ## Build
