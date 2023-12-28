@@ -51,6 +51,9 @@ jobs:
         with:
           run-scripts: true # Required to generate Symfony config cache files
 
+      - name: Prepare test setup
+        run: sed -i -e '/doctrine:/{N;d;}' phpstan.dist.neon
+
       - name: Analyse code
         run: composer phpstan
 
@@ -76,9 +79,9 @@ jobs:
       - name: Prepare test setup
         run: |
           mkdir -p var/data
-          touch var/data/app.db
           bin/console doctrine:database:create --no-interaction --env=test
-          bin/console doctrine:schema:update --force --env=test
+          bin/console doctrine:schema:update --complete --force --env=test
+          bin/console doctrine:fixtures:load --no-interaction --group test --env=test
 
       - name: Run tests
         run: vendor/bin/phpunit --coverage-clover coverage.xml
