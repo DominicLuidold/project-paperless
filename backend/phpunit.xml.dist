@@ -26,10 +26,17 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <coverage processUncoveredFiles="true" cacheDirectory=".coverage-cache">
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">src/App/**/Infrastructure/DataFixtures</directory>
+            <directory suffix=".php">src/App/**/Infrastructure/Types</directory>
+            <directory suffix=".php">src/Framework/Infrastructure/DataFixtures</directory>
+            <directory suffix=".php">src/Framework/Infrastructure/Types</directory>
+            <file>src/App/Kernel.php</file>
+        </exclude>
     </coverage>
 
     <listeners>

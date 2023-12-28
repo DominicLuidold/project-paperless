@@ -18,6 +18,8 @@
 ###< friendsofphp/php-cs-fixer ###
 
 ###> phpunit/phpunit ###
+/.coverage-cache
+/coverage
 /phpunit.xml
 /.phpunit.result.cache
 ###< phpunit/phpunit ###
