@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\StudyProgramme\Application\Message\QueryHandler;
+namespace App\Tests\Unit\App\StudyProgramme\Application\Message\QueryHandler;
 
 use App\StudyProgramme\Application\Message\Query\GetAllStudyProgrammesQuery;
 use App\StudyProgramme\Application\Message\QueryHandler\GetAllStudyProgrammesQueryHandler;
 use App\StudyProgramme\Application\Service\UniqueStudyProgrammeCodeChecker;
-use App\Tests\Unit\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
-use App\Tests\Unit\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
+use App\Tests\Unit\App\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
+use App\Tests\Unit\App\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
 use PHPUnit\Framework\TestCase;
 
 final class GetAllStudyProgrammesQueryHandlerTest extends TestCase

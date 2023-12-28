@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\StudyProgramme\Application\Message\CommandHandler;
+namespace App\Tests\Unit\App\StudyProgramme\Application\Message\CommandHandler;
 
 use App\Common\Application\Exception\NotFoundException;
 use App\Common\Domain\Exception\NonUniquePropertyException;
@@ -11,8 +11,8 @@ use App\StudyProgramme\Application\Message\Command\UpdateStudyProgrammeCommand;
 use App\StudyProgramme\Application\Message\CommandHandler\UpdateStudyProgrammeCommandHandler;
 use App\StudyProgramme\Application\Service\UniqueStudyProgrammeCodeChecker;
 use App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgrammeType;
-use App\Tests\Unit\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
-use App\Tests\Unit\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
+use App\Tests\Unit\App\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
+use App\Tests\Unit\App\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
 use Framework\Domain\Model\TranslationValueDto;
 use PHPUnit\Framework\TestCase;
 

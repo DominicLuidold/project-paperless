@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\Infrastructure\Validation\Constraints;
+namespace App\Tests\Unit\Framework\Infrastructure\Validation\Constraints;
 
 use Framework\Domain\Model\TranslationValueDto;
 use Framework\Infrastructure\Validation\Constraints\TranslationValue;

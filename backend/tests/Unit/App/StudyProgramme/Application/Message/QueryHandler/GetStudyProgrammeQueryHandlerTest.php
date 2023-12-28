@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\StudyProgramme\Application\Message\QueryHandler;
+namespace App\Tests\Unit\App\StudyProgramme\Application\Message\QueryHandler;
 
 use App\Common\Application\Exception\NotFoundException;
 use App\Common\Domain\Id\StudyProgrammeId;
 use App\StudyProgramme\Application\Message\Query\GetStudyProgrammeQuery;
 use App\StudyProgramme\Application\Message\QueryHandler\GetStudyProgrammeQueryHandler;
 use App\StudyProgramme\Application\Service\UniqueStudyProgrammeCodeChecker;
-use App\Tests\Unit\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
-use App\Tests\Unit\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
+use App\Tests\Unit\App\StudyProgramme\Domain\Model\StudyProgrammeBuilder;
+use App\Tests\Unit\App\StudyProgramme\Infrastructure\Repository\FakeStudyProgrammeRepository;
 use PHPUnit\Framework\TestCase;
 
 final class GetStudyProgrammeQueryHandlerTest extends TestCase
