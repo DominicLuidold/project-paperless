@@ -40,6 +40,13 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <directory>src/App/**/Infrastructure/DataFixtures</directory>
+            <directory>src/App/**/Infrastructure/Types</directory>
+            <directory>src/Framework/Infrastructure/DataFixtures</directory>
+            <directory>src/Framework/Infrastructure/Types</directory>
+            <file>src/App/Kernel.php</file>
+        </exclude>
     </source>
 
     <extensions>
