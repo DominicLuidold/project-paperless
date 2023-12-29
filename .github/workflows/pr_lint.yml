@@ -36,7 +36,7 @@ jobs:
             security
             test
           scopes: |
-            (#\d+)(\|#\d)*
+            (#\d+)(\|#\d+)*
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: The subject "{subject}" found in the pull request title "{title}" is wrongly formatted. Please ensure that the subject doesn't start with an uppercase character.
 

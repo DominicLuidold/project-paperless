@@ -8,6 +8,7 @@ updates:
       prefix: misc
     labels:
       - 'type: technical'
+      - 'ops'
 
   - package-ecosystem: composer
     directory: /backend
@@ -17,6 +18,7 @@ updates:
       prefix: misc
     labels:
       - 'type: technical'
+      - 'backend'
     versioning-strategy: increase
     groups:
       symfony:
@@ -33,3 +35,18 @@ updates:
       phpstan:
         patterns:
           - 'phpstan/*'
+    # Temporarily disable version updates for Composer
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: misc
+    labels:
+      - 'type: technical'
+      - 'frontend'
+    versioning-strategy: increase
+    # Temporarily disable version updates for npm/yarn dependencies
+    open-pull-requests-limit: 0
