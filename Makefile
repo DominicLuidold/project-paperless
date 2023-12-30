@@ -11,7 +11,7 @@ USER_UID=$(shell id -u)
 
 # Makefile config
 .DEFAULT_GOAL:=help
-.PHONY: start debug stop enter-backend rebuild setup install-git-hooks run-code-checks help
+.PHONY: start debug stop enter-node enter-backend rebuild setup install-git-hooks run-code-checks help
 
 ## Docker stack
 start: ## Build and start the Docker stack.
