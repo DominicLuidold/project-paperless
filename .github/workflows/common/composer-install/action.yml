@@ -31,6 +31,7 @@ runs:
       run: |
         cd ./backend
         if ${{ inputs.run-scripts }} == true; then
+          mkdir -p ./var/data
           composer install --prefer-dist --no-interaction
         else
           composer install --prefer-dist --no-interaction --no-scripts
