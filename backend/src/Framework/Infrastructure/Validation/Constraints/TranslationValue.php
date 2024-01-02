@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
 final class TranslationValue extends Constraint
 {
-    public const INVALID_FORMAT_ERROR = 'bf172ce5-300d-41ea-85c9-d027f87c0b00';
-    public const UNSUPPORTED_LOCALE_ERROR = '9a0969e2-1c79-4c47-bb1d-a1e9a97a3d1b';
-    public const TOO_LONG_ERROR = '438235ce-c740-4f1b-a7c8-fbf71572e6e0';
+    public const string INVALID_FORMAT_ERROR = 'bf172ce5-300d-41ea-85c9-d027f87c0b00';
+    public const string UNSUPPORTED_LOCALE_ERROR = '9a0969e2-1c79-4c47-bb1d-a1e9a97a3d1b';
+    public const string TOO_LONG_ERROR = '438235ce-c740-4f1b-a7c8-fbf71572e6e0';
 
     protected const ERROR_NAMES = [
         self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR',

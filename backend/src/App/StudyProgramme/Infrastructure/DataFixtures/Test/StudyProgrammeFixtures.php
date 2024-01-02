@@ -26,13 +26,14 @@ final class StudyProgrammeFixtures extends TestFixture
 {
     use ReferenceTrait;
 
-    public const STUDY_PROGRAMME_1_ID = '018c4a1b-aee5-76c3-87d5-ca2b31340546';
-    public const STUDY_PROGRAMME_2_ID = '018c4a1b-aee5-7999-a84e-fa116e82ed8a';
-    public const STUDY_PROGRAMME_3_ID = '018c4a1b-aee5-7eb4-ac62-cf704aa4b8e3';
+    public const string STUDY_PROGRAMME_1_ID = '018c4a1b-aee5-76c3-87d5-ca2b31340546';
+    public const string STUDY_PROGRAMME_2_ID = '018c4a1b-aee5-7999-a84e-fa116e82ed8a';
+    public const string STUDY_PROGRAMME_3_ID = '018c4a1b-aee5-7eb4-ac62-cf704aa4b8e3';
 
     /**
      * @return array<string, StudyProgrammeFixtureData>
      */
+    #[\Override]
     public static function getData(): array
     {
         return [
@@ -71,6 +72,7 @@ final class StudyProgrammeFixtures extends TestFixture
     ) {
     }
 
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         foreach (self::getData() as $id => $data) {

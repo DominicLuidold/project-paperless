@@ -9,10 +9,10 @@ use Fusonic\DDDExtensions\Domain\Validation\Assert;
 
 final class TranslationValueObject extends ValueObject
 {
-    public const SUPPORTED_LOCALES = [
-        'de',
-        'en',
-    ];
+    /**
+     * @var string[]
+     */
+    public const array SUPPORTED_LOCALES = ['de', 'en'];
 
     /**
      * @var array<string, string>
@@ -67,6 +67,7 @@ final class TranslationValueObject extends ValueObject
         return $this->values[$locale] ?? null;
     }
 
+    #[\Override]
     public function equals(ValueObject $object): bool
     {
         return $object instanceof self

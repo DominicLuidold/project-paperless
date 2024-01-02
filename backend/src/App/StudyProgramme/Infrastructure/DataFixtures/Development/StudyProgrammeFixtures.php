@@ -16,7 +16,7 @@ final class StudyProgrammeFixtures extends DevelopmentFixture
 {
     use ReferenceTrait;
 
-    private const STUDY_PROGRAMME_COUNT = 10;
+    private const int STUDY_PROGRAMME_COUNT = 10;
 
     public function __construct(
         private readonly UniqueStudyProgrammeCodeCheckerInterface $uniqueStudyProgrammeCodeChecker,
@@ -24,6 +24,7 @@ final class StudyProgrammeFixtures extends DevelopmentFixture
         parent::__construct();
     }
 
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < self::STUDY_PROGRAMME_COUNT; ++$i) {

@@ -15,6 +15,7 @@ final class TranslationValueValidator extends ConstraintValidator
     /**
      * @param mixed|TranslationValueDto $value
      */
+    #[\Override]
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!($constraint instanceof TranslationValue)) {

@@ -60,6 +60,7 @@ class StudyProgramme extends AggregateRoot
         $this->code = $code;
     }
 
+    #[\Override]
     public function getId(): StudyProgrammeId
     {
         return $this->id;

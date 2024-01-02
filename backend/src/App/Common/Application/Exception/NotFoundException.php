@@ -9,7 +9,7 @@ use Framework\Application\Exception\ApplicationExceptionInterface;
 
 final class NotFoundException extends \RuntimeException implements ApplicationExceptionInterface
 {
-    public const DEFAULT_PROPERTY_NAME = 'id';
+    public const string DEFAULT_PROPERTY_NAME = 'id';
 
     private function __construct(string $message)
     {

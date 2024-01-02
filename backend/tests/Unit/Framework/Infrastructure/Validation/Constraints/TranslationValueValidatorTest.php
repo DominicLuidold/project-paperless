@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  */
 final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 {
+    #[\Override]
     protected function createValidator(): ConstraintValidatorInterface
     {
         return new TranslationValueValidator();
