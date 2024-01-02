@@ -11,6 +11,7 @@ class WebTestCase extends SymfonyWebTestCase
 {
     protected static KernelBrowser $client;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

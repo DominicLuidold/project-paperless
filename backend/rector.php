@@ -20,7 +20,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->phpstanConfigs([
-        __DIR__.'/phpstan.neon',
+        __DIR__.'/phpstan.dist.neon',
         // Rector does not load PHPStan extensions automatically
         __DIR__.'/vendor/phpstan/phpstan-doctrine/extension.neon',
         __DIR__.'/vendor/phpstan/phpstan-phpunit/extension.neon',
@@ -30,7 +30,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         // PHP
-        LevelSetList::UP_TO_PHP_82,
+        LevelSetList::UP_TO_PHP_83,
         SetList::CODE_QUALITY,
         SetList::PRIVATIZATION,
         SetList::TYPE_DECLARATION,
