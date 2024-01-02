@@ -45,14 +45,12 @@ jobs:
         run: |
           sed -i -e 's/KernelDevDebugContainer/KernelTestDebugContainer/g' phpstan.dist.neon
           sed -i -e 's/var\/cache\/dev/var\/cache\/test/g' phpstan.dist.neon
+          sed -i -e '/doctrine:/{N;d;}' phpstan.dist.neon
 
       - name: Setup dependencies
         uses: ./.github/workflows/common/composer-install
         with:
           run-scripts: true # Required to generate Symfony config cache files
-
-      - name: Prepare test setup
-        run: sed -i -e '/doctrine:/{N;d;}' phpstan.dist.neon
 
       - name: Analyse code
         run: composer phpstan
@@ -78,7 +76,7 @@ jobs:
 
       - name: Prepare test setup
         run: |
-          mkdir -p var/data
+          mkdir -p ./var/data
           bin/console doctrine:database:create --no-interaction --env=test
           bin/console doctrine:schema:update --complete --force --env=test
           bin/console doctrine:fixtures:load --no-interaction --group test --env=test
