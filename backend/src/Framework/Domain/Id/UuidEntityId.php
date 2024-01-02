@@ -17,21 +17,25 @@ abstract class UuidEntityId extends EntityId
         $this->id = $id ?? Uuid::v7();
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return (string) $this->id;
     }
 
+    #[\Override]
     public function isDefined(): bool
     {
         return true;
     }
 
+    #[\Override]
     public function getValue(): Uuid
     {
         return $this->id;
     }
 
+    #[\Override]
     public function equals(ValueObject $object): bool
     {
         return $object instanceof self

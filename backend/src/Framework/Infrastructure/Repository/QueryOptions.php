@@ -8,7 +8,10 @@ use Fusonic\DDDExtensions\Domain\Validation\Assert;
 
 final readonly class QueryOptions
 {
-    private const ORDER_VALUES = ['asc', 'desc'];
+    /**
+     * @var string[]
+     */
+    private const array ORDER_VALUES = ['asc', 'desc'];
 
     public function __construct(
         public ?int $offset = null,

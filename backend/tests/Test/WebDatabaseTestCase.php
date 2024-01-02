@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class WebDatabaseTestCase extends WebTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
