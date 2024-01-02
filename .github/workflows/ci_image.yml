@@ -8,6 +8,7 @@ on:
       - 'docker/backend/**/*'
   schedule:
     - cron: '30 2 * * *'
+  workflow_dispatch:
 
 jobs:
   build-ci-image:

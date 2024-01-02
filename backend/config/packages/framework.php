@@ -14,6 +14,5 @@ return static function (FrameworkConfig $config): void {
     $config->session()
         ->handlerId(null)
         ->cookieSecure('auto')
-        ->cookieSamesite('lax')
-        ->storageFactoryId('session.storage.factory.native');
+        ->cookieSamesite('lax');
 };
