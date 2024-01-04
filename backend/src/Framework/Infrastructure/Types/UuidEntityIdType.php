@@ -22,22 +22,24 @@ abstract class UuidEntityIdType extends Type
      */
     abstract protected function getTypeClass(): string;
 
+    #[\Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         if ($this->hasNativeGuidType($platform)) {
             return $platform->getGuidTypeDeclarationSQL($column);
         }
 
-        return $platform->getBinaryTypeDeclarationSQL([
-            'length' => 16,
+        return $platform->getStringTypeDeclarationSQL([
+            'length' => '16',
             'fixed' => true,
         ]);
     }
 
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if ($value instanceof UuidEntityId) {
-            return $this->hasNativeGuidType($platform) ? $value->getValue()->toRfc4122() : $value->getValue()->toBinary();
+            return $value->getValue()->toRfc4122();
         }
 
         if (!\is_string($value)) {
@@ -57,6 +59,7 @@ abstract class UuidEntityIdType extends Type
         }
     }
 
+    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): UuidEntityId
     {
         $typeClass = $this->getTypeClass();
@@ -84,6 +87,7 @@ abstract class UuidEntityIdType extends Type
         }
     }
 
+    #[\Override]
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         // Add comment to prevent Doctrine from always detecting changes that need to be applied to the schema.

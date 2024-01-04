@@ -32,6 +32,7 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",
+        "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.45",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10",
@@ -87,6 +88,7 @@
         "phpcs-fix": "XDEBUG_MODE=off vendor/bin/php-cs-fixer fix -v",
         "rector": "XDEBUG_MODE=off vendor/bin/rector process",
         "test": "XDEBUG_MODE=off vendor/bin/phpunit --testdox",
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html coverage/html --coverage-text",
         "test:functional": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite functional",
         "test:unit": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite unit",
         "auto-scripts": {
@@ -104,6 +106,17 @@
         "post-update-cmd": [
             "@auto-scripts"
         ]
+    },
+    "scripts-descriptions": {
+        "code-checks": "Runs PHP-CS-Fixer in dry-run mode, PHPStan, and Rector",
+        "phpstan": "Runs PHPStan",
+        "phpcs-check": "Runs PHP-CS-Fixer in dry-run mode",
+        "phpcs-fix": "Runs PHP-CS-Fixer",
+        "rector": "Runs Rector",
+        "test": "Runs PHPUnit",
+        "test:coverage": "Runs PHPUnit in coverage mode and provides HTML and text coverage reports",
+        "test:functional": "Runs PHPUnit with tests from the testsuite 'functional'",
+        "test:unit": "Runs PHPUnit with tests from the testsuite 'unit'"
     },
     "conflict": {
         "symfony/symfony": "*"
