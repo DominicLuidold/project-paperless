@@ -16,6 +16,7 @@ final readonly class UniqueStudyProgrammeCodeChecker implements UniqueStudyProgr
     ) {
     }
 
+    #[\Override]
     public function checkUniqueStudyProgrammeCode(string $code): void
     {
         $studyProgramme = $this->studyProgrammeRepository->findOneByCode($code);

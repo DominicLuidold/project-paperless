@@ -14,6 +14,7 @@ use Symfony\Component\PropertyInfo\Type;
 
 final readonly class TranslationValueModelDescriber implements ModelDescriberInterface
 {
+    #[\Override]
     public function describe(Model $model, Schema $schema): void
     {
         $type = $model->getType();
@@ -35,6 +36,7 @@ final readonly class TranslationValueModelDescriber implements ModelDescriberInt
         }
     }
 
+    #[\Override]
     public function supports(Model $model): bool
     {
         $type = $model->getType();

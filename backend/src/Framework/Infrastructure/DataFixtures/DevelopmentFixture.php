@@ -24,6 +24,7 @@ abstract class DevelopmentFixture extends Fixture implements FixtureGroupInterfa
     /**
      * @return string[]
      */
+    #[\Override]
     public static function getGroups(): array
     {
         return [

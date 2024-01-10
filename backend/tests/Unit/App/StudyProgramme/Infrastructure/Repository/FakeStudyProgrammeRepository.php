@@ -29,6 +29,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
 
     private int $countByFilterResult = 0;
 
+    #[\Override]
     public function findOneById(StudyProgrammeId $id): ?StudyProgramme
     {
         if ([] === $this->findOneByIdResults) {
@@ -45,6 +46,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
         return $this;
     }
 
+    #[\Override]
     public function findOneByCode(string $code): ?StudyProgramme
     {
         if ([] === $this->findOneByCodeResults) {
@@ -61,6 +63,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
         return $this;
     }
 
+    #[\Override]
     public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array
     {
         return $this->findAllByFilterResults;
@@ -76,6 +79,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
         return $this;
     }
 
+    #[\Override]
     public function countWithFilter(StudyProgrammeRepositoryFilter $filter): int
     {
         return $this->countByFilterResult;
@@ -88,6 +92,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
         return $this;
     }
 
+    #[\Override]
     public function saveEntity(StudyProgramme $entity): void
     {
     }

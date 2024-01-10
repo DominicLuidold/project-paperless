@@ -16,12 +16,14 @@ final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
     /**
      * @param array<mixed>|null $groups
      */
+    #[\Override]
     public function describe(array $types, Schema $property, array $groups = null, Schema $schema = null): void
     {
         $property->type = 'string';
         $this->setNullableProperty($types[0], $property, $schema);
     }
 
+    #[\Override]
     public function supports(array $types): bool
     {
         return 1 === \count($types)

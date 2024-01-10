@@ -29,6 +29,7 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
         $this->entityManager = $this->getEntityManager();
     }
 
+    #[\Override]
     public function findOneById(StudyProgrammeId $id): ?StudyProgramme
     {
         return $this->createQueryBuilder('studyProgramme')
@@ -38,6 +39,7 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
             ->getOneOrNullResult();
     }
 
+    #[\Override]
     public function findOneByCode(string $code): ?StudyProgramme
     {
         return $this->createQueryBuilder('studyProgramme')
@@ -47,6 +49,7 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
             ->getOneOrNullResult();
     }
 
+    #[\Override]
     public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array
     {
         $qb = $this->createQueryBuilder('studyProgramme')
@@ -60,6 +63,7 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
         return iterator_to_array($paginator->getIterator());
     }
 
+    #[\Override]
     public function countWithFilter(StudyProgrammeRepositoryFilter $filter): int
     {
         $qb = $this->createQueryBuilder('studyProgramme')

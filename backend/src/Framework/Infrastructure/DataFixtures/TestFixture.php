@@ -17,6 +17,7 @@ abstract class TestFixture extends Fixture implements FixtureGroupInterface
      */
     abstract public static function getData(): array;
 
+    #[\Override]
     public static function getGroups(): array
     {
         return [
