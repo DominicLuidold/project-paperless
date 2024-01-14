@@ -3,27 +3,40 @@
                  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) === false">
-        <mat-toolbar>Menu</mat-toolbar>
-
+        <mat-toolbar>Name</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item routerLink="#">
-                <mat-icon matListItemIcon>widgets</mat-icon>
-                <span matListItemTitle>Konfiguration</span>
+            <a mat-list-item routerLink="#" routerLinkActive="active">
+                <mat-icon matListItemIcon>dashboard</mat-icon>
+                <span matListItemTitle>Dashboard</span>
+            </a>
+            <div class="subheader" matSubheader>Konfiguration</div>
+            <a mat-list-item routerLink="#" routerLinkActive="active">
+                <mat-icon matListItemIcon>school</mat-icon>
+                <span matListItemTitle>Studiengänge</span>
             </a>
         </mat-nav-list>
     </mat-sidenav>
-
-    <mat-sidenav-content>
-        <mat-toolbar color="primary">
+    <mat-sidenav-content role="main">
+        <mat-toolbar class="header">
             @if (isHandset$ | async) {
-                <button
-                    type="button"
-                    aria-label="Toggle sidenav"
-                    mat-icon-button
-                    (click)="drawer.toggle()">
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                <button type="button" mat-icon-button (click)="drawer.toggle()">
+                    <mat-icon>menu</mat-icon>
                 </button>
+            } @else {
+                @if (drawer.opened) {
+                    <button type="button" mat-icon-button (click)="drawer.close()"
+                            matTooltip="Menü schließen" matTooltipShowDelay="1250">
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+                } @else {
+                    <button type="button" mat-icon-button (click)="drawer.open()"
+                            matTooltip="Menü öffnen" matTooltipShowDelay="1250">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                }
             }
+
+            <span routerLink="/dashboard" class="header-home-link">Project Paperless</span>
         </mat-toolbar>
 
         <router-outlet></router-outlet>
