@@ -45,7 +45,6 @@
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
-        "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "7.0.*",
         "symfony/web-profiler-bundle": "7.0.*",
         "tomasvotruba/type-coverage": "^0.2"
