@@ -7,6 +7,7 @@ namespace App\Tests\Unit\Framework\Infrastructure\Validation\Constraints;
 use Framework\Domain\Model\TranslationValueDto;
 use Framework\Infrastructure\Validation\Constraints\TranslationValue;
 use Framework\Infrastructure\Validation\Constraints\TranslationValueValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
@@ -30,9 +31,8 @@ final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 
     /**
      * @param array<string, string> $values
-     *
-     * @dataProvider getValidValues
      */
+    #[DataProvider('getValidValues')]
     public function testValidValues(array $values): void
     {
         $translationValueDto = new TranslationValueDto($values);
@@ -43,9 +43,8 @@ final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 
     /**
      * @param array<string, string> $values
-     *
-     * @dataProvider getInvalidFormatValues
      */
+    #[DataProvider('getInvalidFormatValues')]
     public function testInvalidFormatValues(array $values): void
     {
         $translationValueDto = new TranslationValueDto($values);
@@ -59,9 +58,8 @@ final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 
     /**
      * @param array<string, string> $values
-     *
-     * @dataProvider getUnsupportedLocaleValues
      */
+    #[DataProvider('getUnsupportedLocaleValues')]
     public function testUnsupportedLocaleValues(array $values): void
     {
         $translationValueDto = new TranslationValueDto($values);
@@ -77,9 +75,8 @@ final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 
     /**
      * @param array<string, string> $values
-     *
-     * @dataProvider getValidValuesMaxLength
      */
+    #[DataProvider('getValidValuesMaxLength')]
     public function testValidValuesMaxLength(array $values): void
     {
         $translationValueDto = new TranslationValueDto($values);
@@ -90,9 +87,8 @@ final class TranslationValueValidatorTest extends ConstraintValidatorTestCase
 
     /**
      * @param array<string, string> $values
-     *
-     * @dataProvider getInvalidValuesMaxLength
      */
+    #[DataProvider('getInvalidValuesMaxLength')]
     public function testInvalidValuesMaxLength(array $values): void
     {
         $translationValueDto = new TranslationValueDto($values);
