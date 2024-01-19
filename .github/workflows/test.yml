@@ -31,6 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+      env:
+        APP_ENV: test
     defaults:
       run:
         working-directory: ./backend
@@ -38,6 +40,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Prepare test setup
+        run: |
+          sed -i -e 's/KernelDevDebugContainer/KernelTestDebugContainer/g' phpstan.dist.neon
+          sed -i -e 's/var\/cache\/dev/var\/cache\/test/g' phpstan.dist.neon
 
       - name: Setup dependencies
         uses: ./.github/workflows/common/composer-install
