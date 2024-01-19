@@ -18,8 +18,8 @@
 ###< friendsofphp/php-cs-fixer ###
 
 ###> phpunit/phpunit ###
+/.phpunit.cache
 /phpunit.xml
-/.phpunit.result.cache
 ###< phpunit/phpunit ###
 
 ###> phpstan/phpstan ###
