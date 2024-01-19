@@ -28,9 +28,12 @@ runs:
           ${{ runner.os }}-Composer-
 
     - name: Install dependencies
+      # Note: Creating the ./var/data directory is necessary for the Symfony cache warmup that is executed as a
+      # result of running the Composer scripts, if enabled
       run: |
         cd ./backend
         if ${{ inputs.run-scripts }} == true; then
+          mkdir -p ./var/data
           composer install --prefer-dist --no-interaction
         else
           composer install --prefer-dist --no-interaction --no-scripts
