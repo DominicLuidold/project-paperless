@@ -42,7 +42,6 @@ return static function (RectorConfig $rectorConfig): void {
 
         // PHPUnit
         PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
-        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
     ]);
 
