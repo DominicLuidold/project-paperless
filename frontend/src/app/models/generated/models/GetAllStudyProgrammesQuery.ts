@@ -6,7 +6,7 @@
 import type { StudyProgrammeFilter } from './StudyProgrammeFilter';
 
 export type GetAllStudyProgrammesQuery = {
-    filters?: StudyProgrammeFilter;
+    filters: StudyProgrammeFilter;
     page: number;
     limit: number;
     sort: 'id' | 'type';

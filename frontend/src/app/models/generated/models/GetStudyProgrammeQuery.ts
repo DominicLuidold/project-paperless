@@ -6,6 +6,6 @@
 import type { StudyProgrammeId } from './StudyProgrammeId';
 
 export type GetStudyProgrammeQuery = {
-    id?: StudyProgrammeId;
+    id: StudyProgrammeId;
 };
 

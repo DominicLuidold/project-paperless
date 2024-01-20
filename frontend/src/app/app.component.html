@@ -5,12 +5,12 @@
                  [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Name</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item routerLink="#" routerLinkActive="active">
+            <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
                 <mat-icon matListItemIcon>dashboard</mat-icon>
                 <span matListItemTitle>Dashboard</span>
             </a>
             <div class="subheader" matSubheader>Konfiguration</div>
-            <a mat-list-item routerLink="#" routerLinkActive="active">
+            <a mat-list-item routerLink="/study-programmes" routerLinkActive="active">
                 <mat-icon matListItemIcon>school</mat-icon>
                 <span matListItemTitle>Studiengänge</span>
             </a>
@@ -35,10 +35,10 @@
                     </button>
                 }
             }
-
-            <span routerLink="/dashboard" class="header-home-link">Project Paperless</span>
         </mat-toolbar>
 
-        <router-outlet></router-outlet>
+        <div class="content-container">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

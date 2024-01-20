@@ -6,10 +6,10 @@
 import type { StudyProgrammeResponse } from './StudyProgrammeResponse';
 
 export type PaginatedStudyProgrammeResponse = {
-    pages?: number;
-    page?: number;
-    limit?: number;
-    total?: number;
-    _embedded?: Array<StudyProgrammeResponse>;
+    pages: number;
+    page: number;
+    limit: number;
+    total: number;
+    _embedded: Array<StudyProgrammeResponse>;
 };
 
