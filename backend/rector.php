@@ -21,7 +21,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->phpstanConfigs([
         __DIR__.'/phpstan.dist.neon',
-        // Rector does not load PHPStan extensions automatically
+        // Rector does not load PHPStan extensions automatically when phpstan/extension-installer is used
         __DIR__.'/vendor/phpstan/phpstan-doctrine/extension.neon',
         __DIR__.'/vendor/phpstan/phpstan-phpunit/extension.neon',
         __DIR__.'/vendor/phpstan/phpstan-symfony/extension.neon',

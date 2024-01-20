@@ -1922,16 +1922,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.16.2",
+            "version": "v4.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "31da761b6c9d275fb3bbee87c4c6888b17aec4ad"
+                "reference": "2360674a7bd8bbf5fb834b08e89662b6ad851618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/31da761b6c9d275fb3bbee87c4c6888b17aec4ad",
-                "reference": "31da761b6c9d275fb3bbee87c4c6888b17aec4ad",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/2360674a7bd8bbf5fb834b08e89662b6ad851618",
+                "reference": "2360674a7bd8bbf5fb834b08e89662b6ad851618",
                 "shasum": ""
             },
             "require": {
@@ -1944,6 +1944,7 @@
                 "symfony/config": "^5.4|^6.0|^7.0",
                 "symfony/console": "^5.4|^6.0|^7.0",
                 "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/deprecation-contracts": "^2.1|^3",
                 "symfony/framework-bundle": "^5.4.24|^6.0|^7.0",
                 "symfony/http-foundation": "^5.4|^6.0|^7.0",
                 "symfony/http-kernel": "^5.4|^6.0|^7.0",
@@ -1964,7 +1965,6 @@
                 "symfony/asset": "^5.4|^6.0|^7.0",
                 "symfony/browser-kit": "^5.4|^6.0|^7.0",
                 "symfony/cache": "^5.4|^6.0|^7.0",
-                "symfony/deprecation-contracts": "^2.1|^3",
                 "symfony/dom-crawler": "^5.4|^6.0|^7.0",
                 "symfony/expression-language": "^5.4|^6.0|^7.0",
                 "symfony/form": "^5.4|^6.0|^7.0",
@@ -2028,9 +2028,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.16.2"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.18.1"
             },
-            "time": "2024-01-06T21:33:48+00:00"
+            "time": "2024-01-15T16:16:29+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -6390,16 +6390,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.47.1",
+            "version": "v3.48.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "173c60d1eff911c9c54322704623a45561d3241d"
+                "reference": "a92472c6fb66349de25211f31c77eceae3df024e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/173c60d1eff911c9c54322704623a45561d3241d",
-                "reference": "173c60d1eff911c9c54322704623a45561d3241d",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/a92472c6fb66349de25211f31c77eceae3df024e",
+                "reference": "a92472c6fb66349de25211f31c77eceae3df024e",
                 "shasum": ""
             },
             "require": {
@@ -6469,7 +6469,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.47.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.48.0"
             },
             "funding": [
                 {
@@ -6477,7 +6477,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-16T18:54:21+00:00"
+            "time": "2024-01-19T21:44:39+00:00"
         },
         {
             "name": "myclabs/deep-copy",

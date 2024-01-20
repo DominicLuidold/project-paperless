@@ -11,6 +11,8 @@ use Symfony\Component\Uid\Uuid;
 
 final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
 {
+    // Ignore deprecation until https://github.com/nelmio/NelmioApiDocBundle/pull/2098 is merged
+    // @phpstan-ignore-next-line
     use NullablePropertyTrait;
 
     /**

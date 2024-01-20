@@ -7,6 +7,8 @@
          colors="true"
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         failOnDeprecation="true"
          failOnRisky="true"
          failOnWarning="true">
     <php>
@@ -27,10 +29,7 @@
         </testsuite>
     </testsuites>
 
-    <source restrictDeprecations="true"
-            restrictNotices="true"
-            restrictWarnings="true"
-            ignoreSuppressionOfDeprecations="true"
+    <source ignoreSuppressionOfDeprecations="true"
             ignoreSuppressionOfPhpDeprecations="true"
             ignoreSuppressionOfErrors="true"
             ignoreSuppressionOfNotices="true"
