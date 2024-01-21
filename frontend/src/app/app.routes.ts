@@ -16,8 +16,15 @@ export const routes: Route[] = [
     },
     {
         path: 'study-programmes',
-        loadChildren: () => import('./features/study-programme/study-programme.routes').then(
-            mod => mod.STUDY_PROGRAMME_ROUTES
-        ),
+        loadChildren: () => import('./features/study-programme/study-programme.routes')
+            .then(mod => mod.STUDY_PROGRAMME_ROUTES),
+    },
+    {
+        path: 'errors',
+        loadChildren: () => import('./features/error/error.routes').then(mod => mod.ERROR_ROUTES),
+    },
+    {
+        path: '**',
+        redirectTo: '/errors/404',
     },
 ];
