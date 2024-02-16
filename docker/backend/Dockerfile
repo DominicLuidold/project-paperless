@@ -11,7 +11,7 @@ RUN apt update && \
     apt install -y --no-install-recommends supervisor cron curl && \
     # PHP extensions
     chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions intl opcache pdo_pgsql redis-^6@stable zip-^1@stable && \
+    install-php-extensions intl opcache pdo_pgsql redis-^6@stable uuid-^1@stable zip-^1@stable && \
     # Make www-data's home dir writable
     chown www-data:www-data /var/www && \
     # Make cron run with non-root
