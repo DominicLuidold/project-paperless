@@ -16,11 +16,17 @@ final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
     use NullablePropertyTrait;
 
     /**
-     * @param array<mixed>|null $groups
+     * @param string[]|null        $groups
+     * @param array<string, mixed> $context
      */
     #[\Override]
-    public function describe(array $types, Schema $property, ?array $groups = null, ?Schema $schema = null): void
-    {
+    public function describe(
+        array $types,
+        Schema $property,
+        ?array $groups = null,
+        ?Schema $schema = null,
+        array $context = []
+    ): void {
         $property->type = 'string';
         $this->setNullableProperty($types[0], $property, $schema);
     }

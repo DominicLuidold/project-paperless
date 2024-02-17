@@ -17,12 +17,6 @@ final class TranslationValueObjectType extends ValueObjectType
     public const string NAME = 'translation_vo';
 
     #[\Override]
-    public function getName(): string
-    {
-        return self::NAME;
-    }
-
-    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         return parent::serialize($value, static fn (TranslationValueObject $object): array => self::fromObject($object));
@@ -32,13 +26,6 @@ final class TranslationValueObjectType extends ValueObjectType
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?ValueObject
     {
         return parent::deserialize($value, static fn (array $data): TranslationValueObject => self::toObject($data));
-    }
-
-    #[\Override]
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        // Add comment to prevent Doctrine from always detecting changes that need to be applied to the schema.
-        return true;
     }
 
     /**

@@ -12,12 +12,6 @@ final class StudyProgrammeIdType extends UuidEntityIdType
     public const string NAME = 'study_programme_uuid';
 
     #[\Override]
-    public function getName(): string
-    {
-        return self::NAME;
-    }
-
-    #[\Override]
     protected function getTypeClass(): string
     {
         return StudyProgrammeId::class;

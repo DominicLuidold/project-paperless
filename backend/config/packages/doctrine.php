@@ -22,8 +22,7 @@ return static function (DoctrineConfig $doctrine): void {
     ]);
 
     $doctrine->dbal()->connection('default')
-        ->profilingCollectBacktrace((bool) '%kernel.debug%')
-        ->useSavepoints(true);
+        ->profilingCollectBacktrace((bool) '%kernel.debug%');
 
     $doctrine->orm()
         ->autoGenerateProxyClasses(true)

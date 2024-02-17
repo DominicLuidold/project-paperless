@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Framework\Infrastructure\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\Type;
 use Framework\Domain\Id\UuidEntityId;
 use Symfony\Bridge\Doctrine\Types\AbstractUidType;
@@ -30,7 +31,7 @@ abstract class UuidEntityIdType extends Type
         }
 
         return $platform->getStringTypeDeclarationSQL([
-            'length' => '16',
+            'length' => 16,
             'fixed' => true,
         ]);
     }
@@ -87,13 +88,6 @@ abstract class UuidEntityIdType extends Type
         }
     }
 
-    #[\Override]
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        // Add comment to prevent Doctrine from always detecting changes that need to be applied to the schema.
-        return true;
-    }
-
     private function hasNativeGuidType(AbstractPlatform $platform): bool
     {
         // Compatibility with DBAL < 3.4
@@ -108,7 +102,7 @@ abstract class UuidEntityIdType extends Type
 
     private function throwInvalidType(mixed $value): never
     {
-        throw ConversionException::conversionFailedInvalidType(
+        throw InvalidType::new(
             value: $value,
             toType: self::getTypeRegistry()->lookupName($this),
             possibleTypes: ['null', 'string', Uuid::class]
@@ -117,7 +111,7 @@ abstract class UuidEntityIdType extends Type
 
     private function throwValueNotConvertible(mixed $value, \Throwable $previous): never
     {
-        throw ConversionException::conversionFailed(
+        throw ValueNotConvertible::new(
             value: $value,
             toType: self::getTypeRegistry()->lookupName($this),
             previous: $previous

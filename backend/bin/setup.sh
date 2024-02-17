@@ -21,8 +21,7 @@ bin/console doctrine:fixtures:load --no-interaction --group development
 echo "# Setting up test database ..."
 mkdir -p ./var/data
 bin/console doctrine:database:drop --force --env=test
-bin/console doctrine:database:create --no-interaction --env=test
-bin/console doctrine:schema:update --complete --force --env=test
+bin/console doctrine:schema:update --force --env=test
 bin/console doctrine:fixtures:load --no-interaction --group test --env=test
 
 echo "# Clearing outdated cache ..."

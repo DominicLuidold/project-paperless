@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\Config\RectorConfig;
+use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Symfony\Set\SymfonySetList;
@@ -45,6 +46,12 @@ return RectorConfig::configure()
         SymfonySetList::CONFIGS,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
+
+        // Doctrine
+        DoctrineSetList::DOCTRINE_BUNDLE_210,
+        DoctrineSetList::DOCTRINE_ORM_214,
+        DoctrineSetList::DOCTRINE_DBAL_40,
+        DoctrineSetList::DOCTRINE_CODE_QUALITY,
 
         // PHPUnit
         PHPUnitSetList::PHPUNIT_100,
