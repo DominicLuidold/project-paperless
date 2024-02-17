@@ -11,7 +11,7 @@ RUN apt update && \
     apt install -y --no-install-recommends supervisor cron curl && \
     # PHP extensions
     chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions intl opcache pdo_pgsql redis-^6 zip && \
+    install-php-extensions intl opcache pdo_pgsql redis-^6@stable uuid-^1@stable zip-^1@stable && \
     # Make www-data's home dir writable
     chown www-data:www-data /var/www && \
     # Make cron run with non-root
@@ -38,7 +38,7 @@ ARG USER_UID
 
 RUN apt update && \
     # PHP extensions
-    install-php-extensions @composer xdebug-^3 && \
+    install-php-extensions @composer xdebug-^3@stable && \
     # Symfony CLI
     curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash && \
     apt install -y --no-install-recommends symfony-cli && \
