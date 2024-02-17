@@ -29,7 +29,7 @@ final class TranslationValue extends Constraint
         public string $invalidFormatMessage = 'Invalid translation format. Correct example: `{\'de\': \'string\', \'en\': \'string-en\'}`',
         public string $unsupportedLocaleMessage = 'The locale is unsupported. It should be one of: {{ locales }}',
         public string $maxLengthMessage = 'This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.',
-        array $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
     ) {
         parent::__construct([], $groups, $payload);

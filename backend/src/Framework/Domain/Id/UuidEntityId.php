@@ -12,7 +12,7 @@ abstract class UuidEntityId extends EntityId
 {
     private readonly Uuid $id;
 
-    public function __construct(Uuid $id = null)
+    public function __construct(?Uuid $id = null)
     {
         $this->id = $id ?? Uuid::v7();
     }

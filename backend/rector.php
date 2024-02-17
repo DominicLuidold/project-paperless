@@ -6,48 +6,51 @@ use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\Config\RectorConfig;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SymfonySetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__.'/config',
         __DIR__.'/public',
         __DIR__.'/src',
         __DIR__.'/tests',
-    ]);
-
-    $rectorConfig->phpstanConfigs([
+    ])
+    ->withPHPStanConfigs([
         __DIR__.'/phpstan.dist.neon',
         // Rector does not load PHPStan extensions automatically when phpstan/extension-installer is used
         __DIR__.'/vendor/phpstan/phpstan-doctrine/extension.neon',
+        __DIR__.'/vendor/phpstan/phpstan-doctrine/rules.neon',
+        __DIR__.'/vendor/phpstan/phpstan-deprecation-rules/rules.neon',
         __DIR__.'/vendor/phpstan/phpstan-phpunit/extension.neon',
+        __DIR__.'/vendor/phpstan/phpstan-phpunit/rules.neon',
+        __DIR__.'/vendor/phpstan/phpstan-strict-rules/rules.neon',
         __DIR__.'/vendor/phpstan/phpstan-symfony/extension.neon',
+        __DIR__.'/vendor/phpstan/phpstan-symfony/rules.neon',
         __DIR__.'/vendor/tomasvotruba/type-coverage/config/extension.neon',
-    ]);
-
-    $rectorConfig->sets([
-        // PHP
-        LevelSetList::UP_TO_PHP_83,
-        SetList::CODE_QUALITY,
-        SetList::PRIVATIZATION,
-        SetList::TYPE_DECLARATION,
-
+    ])
+    ->withSymfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml')
+    ->withPhpSets(php83: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        strictBooleans: true
+    )
+    ->withSets([
         // Symfony
         SymfonySetList::SYMFONY_64,
-        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::CONFIGS,
         SymfonySetList::SYMFONY_CODE_QUALITY,
+        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
 
         // PHPUnit
         PHPUnitSetList::PHPUNIT_100,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-    ]);
-
-    $rectorConfig->skip([
-        FinalizeClassesWithoutChildrenRector::class,
+    ])
+    ->withSkip([
         FlipTypeControlToUseExclusiveTypeRector::class,
         PreferPHPUnitThisCallRector::class,
     ]);
-};

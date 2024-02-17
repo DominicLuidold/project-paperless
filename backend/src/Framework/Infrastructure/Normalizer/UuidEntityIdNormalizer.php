@@ -15,7 +15,7 @@ final readonly class UuidEntityIdNormalizer implements NormalizerInterface, Deno
      * @param mixed|UuidEntityId $object
      */
     #[\Override]
-    public function normalize(mixed $object, string $format = null, array $context = []): string
+    public function normalize(mixed $object, ?string $format = null, array $context = []): string
     {
         return $object->getValue()->toRfc4122();
     }
@@ -24,13 +24,13 @@ final readonly class UuidEntityIdNormalizer implements NormalizerInterface, Deno
      * @param array<mixed> $context
      */
     #[\Override]
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof UuidEntityId;
     }
 
     #[\Override]
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): UuidEntityId
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): UuidEntityId
     {
         /** @var UuidEntityId $id */
         $id = new $type(Uuid::fromString($data));
@@ -42,7 +42,7 @@ final readonly class UuidEntityIdNormalizer implements NormalizerInterface, Deno
      * @param array<mixed> $context
      */
     #[\Override]
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return \is_string($data) && Uuid::isValid($data) && is_a($type, UuidEntityId::class, true);
     }

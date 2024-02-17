@@ -8,8 +8,11 @@
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
          displayDetailsOnTestsThatTriggerDeprecations="true"
-         failOnDeprecation="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
          failOnRisky="true"
+         failOnNotice="true"
          failOnWarning="true">
     <php>
         <ini name="display_errors" value="1"/>
@@ -31,11 +34,11 @@
 
     <source ignoreSuppressionOfDeprecations="true"
             ignoreSuppressionOfPhpDeprecations="true"
-            ignoreSuppressionOfErrors="true"
             ignoreSuppressionOfNotices="true"
             ignoreSuppressionOfPhpNotices="true"
             ignoreSuppressionOfWarnings="true"
-            ignoreSuppressionOfPhpWarnings="true">
+            ignoreSuppressionOfPhpWarnings="true"
+            ignoreSuppressionOfErrors="true">
         <include>
             <directory>src</directory>
         </include>
