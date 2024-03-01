@@ -13,7 +13,7 @@ final readonly class CreateStudyProgrammeCommand
 {
     public function __construct(
         #[Assert\NotNull]
-        #[CustomAssert\TranslationValue]
+        #[CustomAssert\TranslationValue(maxLength: 255)]
         public TranslationValueDto $name,
 
         #[Assert\NotNull]

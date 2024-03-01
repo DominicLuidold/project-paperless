@@ -38,6 +38,7 @@ final readonly class GetAllStudyProgrammesQuery
         return [
             'id',
             'type',
+            'numberOfSemesters',
         ];
     }
 }

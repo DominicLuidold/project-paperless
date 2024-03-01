@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Framework\Application\Message\Response;
 
-use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**
  * @template T of object

@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait PaginatedQueryTrait
 {
-    final public const DEFAULT_PAGE = 1;
-    final public const DEFAULT_LIMIT = 30;
+    final public const int DEFAULT_PAGE = 1;
+    final public const int DEFAULT_LIMIT = 30;
 
     #[Assert\NotNull]
     #[Assert\Positive]

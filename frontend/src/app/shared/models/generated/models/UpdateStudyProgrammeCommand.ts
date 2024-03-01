@@ -8,7 +8,6 @@ import type { StudyProgrammeType } from './StudyProgrammeType';
 import type { TranslationValueDto } from './TranslationValueDto';
 
 export type UpdateStudyProgrammeCommand = {
-    id: StudyProgrammeId;
     name: TranslationValueDto;
     type: StudyProgrammeType;
     numberOfSemesters: number;

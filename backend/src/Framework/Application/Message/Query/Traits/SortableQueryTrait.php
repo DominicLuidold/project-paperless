@@ -8,8 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait SortableQueryTrait
 {
-    final public const DEFAULT_SORT = 'id';
-    final public const DEFAULT_ORDER = 'asc';
+    final public const string DEFAULT_SORT = 'id';
+    final public const string DEFAULT_ORDER = 'asc';
 
     #[Assert\NotBlank]
     #[Assert\Choice(callback: 'getSortableFields')]

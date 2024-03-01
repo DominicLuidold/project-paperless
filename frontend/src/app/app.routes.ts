@@ -1,4 +1,4 @@
-import { DashboardComponent } from "./features/dashboard/dashboard.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Route } from '@angular/router';
 
 export const routes: Route[] = [
@@ -16,12 +16,13 @@ export const routes: Route[] = [
     },
     {
         path: 'study-programmes',
-        loadChildren: () => import('./features/study-programme/study-programme.routes')
-            .then(mod => mod.STUDY_PROGRAMME_ROUTES),
+        loadChildren: () => import('./study-programme/study-programme.routes')
+            .then(routes => routes.STUDY_PROGRAMME_ROUTES),
     },
     {
         path: 'errors',
-        loadChildren: () => import('./features/error/error.routes').then(mod => mod.ERROR_ROUTES),
+        loadChildren: () => import('./error/error.routes')
+            .then(routes => routes.ERROR_ROUTES),
     },
     {
         path: '**',

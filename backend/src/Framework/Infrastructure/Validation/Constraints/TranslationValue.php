@@ -14,7 +14,10 @@ final class TranslationValue extends Constraint
     public const string UNSUPPORTED_LOCALE_ERROR = '9a0969e2-1c79-4c47-bb1d-a1e9a97a3d1b';
     public const string TOO_LONG_ERROR = '438235ce-c740-4f1b-a7c8-fbf71572e6e0';
 
-    protected const ERROR_NAMES = [
+    /**
+     * @var array<string, string>
+     */
+    protected const array ERROR_NAMES = [
         self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR',
         self::UNSUPPORTED_LOCALE_ERROR => 'UNSUPPORTED_LOCALE_ERROR',
         self::TOO_LONG_ERROR => 'TOO_LONG_ERROR',
