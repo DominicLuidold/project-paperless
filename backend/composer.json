@@ -94,9 +94,9 @@
         "phpcs-fix": "XDEBUG_MODE=off vendor/bin/php-cs-fixer fix -v",
         "rector": "XDEBUG_MODE=off vendor/bin/rector process",
         "test": "XDEBUG_MODE=off vendor/bin/phpunit --testdox",
-        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html coverage/html --coverage-text",
-        "test:functional": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite functional",
-        "test:unit": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite unit",
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html=coverage/html --coverage-text",
+        "test:functional": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite=functional",
+        "test:unit": "XDEBUG_MODE=off vendor/bin/phpunit --testdox --testsuite=unit",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

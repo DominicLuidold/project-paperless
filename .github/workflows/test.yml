@@ -78,9 +78,8 @@ jobs:
       - name: Prepare test setup
         run: |
           mkdir -p ./var/data
-          bin/console doctrine:database:create --no-interaction --env=test
-          bin/console doctrine:schema:update --complete --force --env=test
-          bin/console doctrine:fixtures:load --no-interaction --group test --env=test
+          bin/console doctrine:schema:update --force --env=test
+          bin/console doctrine:fixtures:load --no-interaction --group=test --env=test
 
       - name: Run tests
         run: vendor/bin/phpunit --coverage-clover coverage.xml
