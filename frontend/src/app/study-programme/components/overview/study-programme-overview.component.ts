@@ -75,6 +75,7 @@ export class StudyProgrammeOverviewComponent implements AfterViewInit {
         this.dialog.open(StudyProgrammeCrudComponent, {data: studyProgramme});
     }
 
+    // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
     ngAfterViewInit(): void {
     }
 }

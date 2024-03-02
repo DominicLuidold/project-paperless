@@ -17,6 +17,7 @@ export class StudyProgrammeBackendService {
     constructor(private readonly http: HttpClient) {
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getAllStudyProgrammes(params: GetAllStudyProgrammesQuery): Observable<PaginatedStudyProgrammeResponse> {
         // TODO - Use params
         return this.http.get<PaginatedStudyProgrammeResponse>(API_URLS.getAllStudyProgrammes());

@@ -8,51 +8,59 @@ import { map } from "rxjs/operators";
 @Injectable()
 export class StudyProgrammeEffects {
     getAllStudyProgrammesEffect$ = createEffect(
-        (): Actions => this.actions$.pipe(
-            ofType(StudyProgrammeActions.getAll),
-            exhaustMap(({payload}) => this.studyProgrammeBackend.getAllStudyProgrammes(payload)
-                .pipe(
-                    map(response => StudyProgrammeActions.getAllSuccess({payload: response})),
-                    catchError(() => of(StudyProgrammeActions.getAllFailure))
+        (): Actions => {
+            return this.actions$.pipe(
+                ofType(StudyProgrammeActions.getAll),
+                exhaustMap(({ payload }) => this.studyProgrammeBackend.getAllStudyProgrammes(payload)
+                    .pipe(
+                        map(response => StudyProgrammeActions.getAllSuccess({ payload: response })),
+                        catchError(() => of(StudyProgrammeActions.getAllFailure))
+                    )
                 )
             )
-        )
+        }
     );
 
     getStudyProgrammeEffect$ = createEffect(
-        (): Actions => this.actions$.pipe(
-            ofType(StudyProgrammeActions.get),
-            exhaustMap(({payload}) => this.studyProgrammeBackend.getStudyProgramme(payload.id)
-                .pipe(
-                    map(response => StudyProgrammeActions.getSuccess({payload: response})),
-                    catchError(() => of(StudyProgrammeActions.getFailure))
+        (): Actions => {
+            return this.actions$.pipe(
+                ofType(StudyProgrammeActions.get),
+                exhaustMap(({ payload }) => this.studyProgrammeBackend.getStudyProgramme(payload.id)
+                    .pipe(
+                        map(response => StudyProgrammeActions.getSuccess({ payload: response })),
+                        catchError(() => of(StudyProgrammeActions.getFailure))
+                    )
                 )
             )
-        )
+        }
     );
 
     createStudyProgrammeEffect$ = createEffect(
-        (): Actions => this.actions$.pipe(
-            ofType(StudyProgrammeActions.create),
-            exhaustMap(({payload}) => this.studyProgrammeBackend.createStudyProgramme(payload)
-                .pipe(
-                    map(response => StudyProgrammeActions.createSuccess({payload: response})),
-                    catchError(() => of(StudyProgrammeActions.createFailure()))
+        (): Actions => {
+            return this.actions$.pipe(
+                ofType(StudyProgrammeActions.create),
+                exhaustMap(({ payload }) => this.studyProgrammeBackend.createStudyProgramme(payload)
+                    .pipe(
+                        map(response => StudyProgrammeActions.createSuccess({ payload: response })),
+                        catchError(() => of(StudyProgrammeActions.createFailure()))
+                    )
                 )
             )
-        )
+        }
     );
 
     updateStudyProgrammeEffect$ = createEffect(
-        (): Actions => this.actions$.pipe(
-            ofType(StudyProgrammeActions.update),
-            exhaustMap(({payload}) => this.studyProgrammeBackend.updateStudyProgramme(payload.id, payload.studyProgramme)
-                .pipe(
-                    map(response => StudyProgrammeActions.updateSuccess({payload: response})),
-                    catchError(() => of(StudyProgrammeActions.updateFailure()))
+        (): Actions => {
+            return this.actions$.pipe(
+                ofType(StudyProgrammeActions.update),
+                exhaustMap(({ payload }) => this.studyProgrammeBackend.updateStudyProgramme(payload.id, payload.studyProgramme)
+                    .pipe(
+                        map(response => StudyProgrammeActions.updateSuccess({ payload: response })),
+                        catchError(() => of(StudyProgrammeActions.updateFailure()))
+                    )
                 )
             )
-        )
+        }
     );
 
     constructor(

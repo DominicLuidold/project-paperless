@@ -4,7 +4,7 @@ import { StudyProgrammeActions } from "./study-programme.actions";
 import { Nullable, StateSlice } from "../../shared/models/interfaces/state-slice.model";
 
 export type StudyProgrammeState = StateSlice<
-    Nullable<StudyProgrammeResponse>|
+    Nullable<StudyProgrammeResponse> |
     PaginatedStudyProgrammeResponse
 >;
 
@@ -15,14 +15,14 @@ export const initialState: StudyProgrammeState = {
     error: false,
 }
 
-export const studyProgrammeReducer = createFeature({
+export const StudyProgrammeReducer = createFeature({
     name: 'studyProgramme',
     reducer: createReducer(
         initialState,
         // Get All
         on(
             StudyProgrammeActions.getAll,
-            (_state, _action): StudyProgrammeState => ({
+            (): StudyProgrammeState => ({
                 ...initialState,
                 loading: true,
             })
@@ -49,7 +49,7 @@ export const studyProgrammeReducer = createFeature({
         // Get
         on(
             StudyProgrammeActions.get,
-            (_state, _action): StudyProgrammeState => ({
+            (): StudyProgrammeState => ({
                 ...initialState,
                 loading: true,
             })
@@ -76,7 +76,7 @@ export const studyProgrammeReducer = createFeature({
         // Create
         on(
             StudyProgrammeActions.create,
-            (_state, _action): StudyProgrammeState => ({
+            (): StudyProgrammeState => ({
                 ...initialState,
                 loading: true,
             })
@@ -103,7 +103,7 @@ export const studyProgrammeReducer = createFeature({
         // Update
         on(
             StudyProgrammeActions.update,
-            (_state, _action): StudyProgrammeState => ({
+            (): StudyProgrammeState => ({
                 ...initialState,
                 loading: true,
             })
@@ -132,9 +132,9 @@ export const studyProgrammeReducer = createFeature({
 export const {
     name,
     reducer,
-    selectStudyProgrammesState,
+    selectStudyProgrammeState,
     selectData,
     selectLoading,
     selectLoaded,
     selectError,
-} = studyProgrammeReducer;
+} = StudyProgrammeReducer;
