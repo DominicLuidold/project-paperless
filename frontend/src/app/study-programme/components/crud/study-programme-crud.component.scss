@@ -1,0 +1,26 @@
+mat-dialog-content,
+.dialog-container,
+.vertical-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-container {
+    width: 30vw;
+    align-items: center;
+
+    mat-dialog-content {
+        align-items: center;
+        width: 100%;
+    }
+
+    mat-dialog-actions {
+        margin-bottom: 12px;
+        justify-content: space-between;
+        width: 70%;
+    }
+
+    .vertical-form-container {
+        width: 70%;
+    }
+}

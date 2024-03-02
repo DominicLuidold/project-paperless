@@ -11,17 +11,27 @@ use Symfony\Component\Uid\Uuid;
 
 final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
 {
+    // Ignore deprecation until https://github.com/nelmio/NelmioApiDocBundle/pull/2098 is merged
+    // @phpstan-ignore-next-line
     use NullablePropertyTrait;
 
     /**
-     * @param array<mixed>|null $groups
+     * @param string[]|null        $groups
+     * @param array<string, mixed> $context
      */
-    public function describe(array $types, Schema $property, array $groups = null, Schema $schema = null): void
-    {
+    #[\Override]
+    public function describe(
+        array $types,
+        Schema $property,
+        ?array $groups = null,
+        ?Schema $schema = null,
+        array $context = []
+    ): void {
         $property->type = 'string';
         $this->setNullableProperty($types[0], $property, $schema);
     }
 
+    #[\Override]
     public function supports(array $types): bool
     {
         return 1 === \count($types)

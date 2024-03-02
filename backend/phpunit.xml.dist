@@ -7,7 +7,12 @@
          colors="true"
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
          failOnRisky="true"
+         failOnNotice="true"
          failOnWarning="true">
     <php>
         <ini name="display_errors" value="1"/>
@@ -27,19 +32,23 @@
         </testsuite>
     </testsuites>
 
-    <source restrictDeprecations="true"
-            restrictNotices="true"
-            restrictWarnings="true"
-            ignoreSuppressionOfDeprecations="true"
+    <source ignoreSuppressionOfDeprecations="true"
             ignoreSuppressionOfPhpDeprecations="true"
-            ignoreSuppressionOfErrors="true"
             ignoreSuppressionOfNotices="true"
             ignoreSuppressionOfPhpNotices="true"
             ignoreSuppressionOfWarnings="true"
-            ignoreSuppressionOfPhpWarnings="true">
+            ignoreSuppressionOfPhpWarnings="true"
+            ignoreSuppressionOfErrors="true">
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <directory>src/App/**/Infrastructure/DataFixtures</directory>
+            <directory>src/App/**/Infrastructure/Types</directory>
+            <directory>src/Framework/Infrastructure/DataFixtures</directory>
+            <directory>src/Framework/Infrastructure/Types</directory>
+            <file>src/App/Kernel.php</file>
+        </exclude>
     </source>
 
     <extensions>

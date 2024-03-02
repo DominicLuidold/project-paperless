@@ -1,0 +1,60 @@
+.header {
+    background-color: white;
+    margin: 0 -60px 40px -60px;
+    padding: 24px 60px 24px 60px;
+
+    display: flex;
+
+    h1 {
+        margin: 0;
+    }
+
+    mat-divider {
+        margin: 0 8px 0 8px;
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+}
+
+.mat-column-name {
+    width: 40%;
+}
+
+.mat-column-type {
+    width: 20%;
+}
+
+.mat-column-numberofsemesters {
+    width: 15%;
+}
+
+.mat-column-code {
+    width: 15%;
+}
+
+.mat-column-menu {
+    width: 5%;
+}
+
+.mat-mdc-paginator {
+    background-color: unset;
+}
+
+th.mat-mdc-header-cell .mat-icon {
+    cursor: help;
+    overflow: unset;
+}
+
+.mat-mdc-menu-item {
+    span {
+        font-size: 14px;
+    }
+
+    mat-icon {
+        font-size: 20px;
+        line-height: unset;
+        margin-right: 12px;
+    }
+}

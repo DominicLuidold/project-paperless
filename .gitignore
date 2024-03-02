@@ -1,1 +1,6 @@
+# IDE
+/.idea
+/.run
+
+# Local setup
 .env.local
