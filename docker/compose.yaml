@@ -8,8 +8,9 @@ services:
             dockerfile: ./docker/backend/Dockerfile
             target: development
             args:
-                USER_UID: ${USER_UID}
+                FRANKENPHP_VERSION: ${FRANKENPHP_VERSION}
                 PHP_VERSION: ${PHP_VERSION}
+                USER_UID: ${USER_UID}
             cache_from:
                 - ${PROJECT_NAME}-backend:dev
         environment:

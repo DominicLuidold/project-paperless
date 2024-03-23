@@ -2,6 +2,6 @@
 
 ARG NODE_VERSION
 
-FROM node:${NODE_VERSION}-bookworm-slim
+FROM node:${NODE_VERSION}-bookworm
 
 RUN npm install -g @angular/cli
