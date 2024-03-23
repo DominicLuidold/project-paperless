@@ -1,0 +1,18 @@
+{
+	frankenphp {
+		{$FRANKENPHP_CONFIG}
+	}
+
+	auto_https off
+
+	order php_server before file_server
+}
+
+:80 {
+	log
+
+	root * /var/www/app/public
+	encode zstd br gzip
+
+	php_server
+}

@@ -1,19 +1,20 @@
 # syntax=docker/dockerfile:1
 
+ARG FRANKENPHP_VERSION
 ARG PHP_VERSION
 
-FROM php:${PHP_VERSION}-fpm-bookworm AS base
-
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+FROM dunglas/frankenphp:${FRANKENPHP_VERSION}-php${PHP_VERSION}-bookworm AS base
 
 RUN apt update && \
     # Supervisor + Cron + Curl
     apt install -y --no-install-recommends supervisor cron curl && \
     # PHP extensions
-    chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions intl opcache pdo_pgsql redis-^6@stable uuid-^1@stable zip-^1@stable && \
     # Make www-data's home dir writable
     chown www-data:www-data /var/www && \
+    # Run FrankenPHP as non-root user (https://frankenphp.dev/docs/docker/#running-as-a-non-root-user)
+    setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp && \
+    chown -R www-data:www-data /data/caddy && chown -R www-data:www-data /config/caddy && \
     # Make cron run with non-root
     touch /var/run/crond.pid && \
     chmod u+s /usr/sbin/cron && \
@@ -28,7 +29,7 @@ RUN rm -R /etc/cron.daily
 COPY ./docker/backend/files/etc/supervisor/conf.d/base.conf /etc/supervisor/conf.d/base.conf
 COPY ./docker/backend/files/etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ./docker/backend/files/usr/local/etc/php/conf.d/yy-base.ini /usr/local/etc/php/conf.d/yy-base.ini
-COPY ./docker/backend/files/usr/local/etc/php-fpm.d/yy-base.conf /usr/local/etc/php-fpm.d/yy-base.conf
+COPY ./docker/backend/files/etc/caddy/Caddyfile /etc/caddy/Caddyfile
 
 WORKDIR /var/www/app
 
@@ -50,9 +51,10 @@ RUN apt update && \
 COPY ./docker/backend/files/bin/entrypoint.development.sh /bin/entrypoint.sh
 COPY ./docker/backend/files/etc/supervisor/conf.d/development.conf /etc/supervisor/conf.d/development.conf
 COPY ./docker/backend/files/usr/local/etc/php/conf.d/zz-development.ini /usr/local/etc/php/conf.d/zz-development.ini
-COPY ./docker/backend/files/usr/local/etc/php-fpm.d/zz-development.conf /usr/local/etc/php-fpm.d/zz-development.conf
 
 USER www-data
+
+HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 
 ENTRYPOINT /bin/entrypoint.sh
 
