@@ -27,7 +27,9 @@ return static function (DoctrineConfig $doctrine): void {
     $doctrine->orm()
         ->autoGenerateProxyClasses(true)
         ->enableLazyGhostObjects(true)
-        ->defaultEntityManager('default');
+        ->defaultEntityManager('default')
+        ->controllerResolver()
+            ->autoMapping(false);
 
     $em = $doctrine->orm()->entityManager('default')
         ->reportFieldsWhereDeclared(true)
