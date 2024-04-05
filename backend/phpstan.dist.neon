@@ -5,14 +5,25 @@ parameters:
         - tests/
     symfony:
         consoleApplicationLoader: tests/console-application.php
-        container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
     doctrine:
         objectManagerLoader: tests/object-manager.php
     scanDirectories:
         - var/cache/dev/Symfony/Config
-
+    scanFiles:
+        - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
     type_coverage:
-        return_type: 100
-        param_type: 100
-        property_type: 100
-        print_suggestions: false
+        return: 100
+        param: 100
+        property: 100
+
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/tomasvotruba/type-coverage/config/extension.neon

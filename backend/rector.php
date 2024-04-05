@@ -16,19 +16,7 @@ return RectorConfig::configure()
         __DIR__.'/src',
         __DIR__.'/tests',
     ])
-    ->withPHPStanConfigs([
-        __DIR__.'/phpstan.dist.neon',
-        // Rector does not load PHPStan extensions automatically when phpstan/extension-installer is used
-        __DIR__.'/vendor/phpstan/phpstan-doctrine/extension.neon',
-        __DIR__.'/vendor/phpstan/phpstan-doctrine/rules.neon',
-        __DIR__.'/vendor/phpstan/phpstan-deprecation-rules/rules.neon',
-        __DIR__.'/vendor/phpstan/phpstan-phpunit/extension.neon',
-        __DIR__.'/vendor/phpstan/phpstan-phpunit/rules.neon',
-        __DIR__.'/vendor/phpstan/phpstan-strict-rules/rules.neon',
-        __DIR__.'/vendor/phpstan/phpstan-symfony/extension.neon',
-        __DIR__.'/vendor/phpstan/phpstan-symfony/rules.neon',
-        __DIR__.'/vendor/tomasvotruba/type-coverage/config/extension.neon',
-    ])
+    ->withPHPStanConfigs([__DIR__.'/phpstan.dist.neon'])
     ->withSymfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml')
     ->withPhpSets(php83: true)
     ->withPreparedSets(
