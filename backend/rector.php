@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
 use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
@@ -46,6 +47,11 @@ return RectorConfig::configure()
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
     ])
     ->withSkip([
+        CallableThisArrayToAnonymousFunctionRector::class => [
+            // 'set_exception_handler' must be called with the array syntax to not cause errors in PHPUnit >= 11.0.
+            // Remove when https://github.com/symfony/symfony/issues/53812 is fixed
+            __DIR__.'/tests/bootstrap.php',
+        ],
         FlipTypeControlToUseExclusiveTypeRector::class,
         PreferPHPUnitThisCallRector::class,
     ]);

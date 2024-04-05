@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.1/phpunit.xsd"
          bootstrap="tests/bootstrap.php"
          cacheDirectory=".phpunit.cache"
          executionOrder="depends,defects"
@@ -32,16 +32,20 @@
         </testsuite>
     </testsuites>
 
-    <source ignoreSuppressionOfDeprecations="true"
+    <source ignoreIndirectDeprecations="true"
+            ignoreSuppressionOfDeprecations="true"
             ignoreSuppressionOfPhpDeprecations="true"
+            restrictNotices="true"
             ignoreSuppressionOfNotices="true"
             ignoreSuppressionOfPhpNotices="true"
+            restrictWarnings="true"
             ignoreSuppressionOfWarnings="true"
             ignoreSuppressionOfPhpWarnings="true"
             ignoreSuppressionOfErrors="true">
         <include>
             <directory>src</directory>
         </include>
+
         <exclude>
             <directory>src/App/**/Infrastructure/DataFixtures</directory>
             <directory>src/App/**/Infrastructure/Types</directory>
@@ -49,6 +53,10 @@
             <directory>src/Framework/Infrastructure/Types</directory>
             <file>src/App/Kernel.php</file>
         </exclude>
+
+        <deprecationTrigger>
+            <function>trigger_deprecation</function>
+        </deprecationTrigger>
     </source>
 
     <extensions>
