@@ -27,7 +27,7 @@ class WebDatabaseTestCase extends WebTestCase
             );
         }
 
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore method.notFound
         $queryCount = static::$client->getProfile()->getCollector('db')->getQueryCount();
 
         self::assertLessThanOrEqual($expected, $queryCount, $message);

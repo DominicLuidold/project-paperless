@@ -11,7 +11,7 @@ USER_UID=$(shell id -u)
 
 # Makefile config
 .DEFAULT_GOAL:=help
-.PHONY: start debug stop enter-node enter-backend rebuild setup install-git-hooks run-code-checks help
+.PHONY: start debug stop node backend rebuild setup install-git-hooks run-code-checks help
 
 ## Docker stack
 start: ## Build and start the Docker stack.
@@ -23,10 +23,10 @@ debug: ## Build and start the Docker stack with debugging enabled.
 stop: ## Stop the Docker stack.
 	@docker compose -p ${PROJECT_NAME} down
 
-enter-node: ## Enter the frontend Node.js container.
+node: ## Enter the frontend Node.js container.
 	@./docker/frontend/node-ci.sh || true
 
-enter-backend: ## Enter the backend PHP container.
+backend: ## Enter the backend PHP container.
 	@docker exec -it ${PROJECT_NAME}-backend-1 /bin/bash || true
 
 ## Build

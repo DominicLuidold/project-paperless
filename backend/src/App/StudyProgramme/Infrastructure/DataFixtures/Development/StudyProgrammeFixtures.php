@@ -29,7 +29,7 @@ final class StudyProgrammeFixtures extends DevelopmentFixture
     {
         for ($i = 0; $i < self::STUDY_PROGRAMME_COUNT; ++$i) {
             $studyProgramme = StudyProgramme::create(
-                // @phpstan-ignore-next-line
+                // @phpstan-ignore argument.type
                 name: TranslationValueObject::create([
                     'de' => $this->faker->words(asText: true),
                     'en' => $this->faker->words(asText: true),

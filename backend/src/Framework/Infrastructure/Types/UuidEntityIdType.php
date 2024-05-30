@@ -91,12 +91,12 @@ abstract class UuidEntityIdType extends Type
     private function hasNativeGuidType(AbstractPlatform $platform): bool
     {
         // Compatibility with DBAL < 3.4
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore function.alreadyNarrowedType
         $method = method_exists($platform, 'getStringTypeDeclarationSQL')
             ? 'getStringTypeDeclarationSQL'
             : 'getVarcharTypeDeclarationSQL';
 
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore method.dynamicName
         return $platform->getGuidTypeDeclarationSQL([]) !== $platform->$method(['fixed' => true, 'length' => 36]);
     }
 

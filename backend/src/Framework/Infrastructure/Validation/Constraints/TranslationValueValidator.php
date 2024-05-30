@@ -30,7 +30,7 @@ final class TranslationValueValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, TranslationValueDto::class);
         }
 
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore function.alreadyNarrowedType
         $keys = array_filter(array_keys($value->values), static fn (mixed $key): bool => \is_string($key));
 
         if ([] === $keys || [] === array_values($value->values)) {

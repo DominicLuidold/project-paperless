@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  php_codestyle:
-    name: PHP Codestyle
+  php-cs-fixer:
+    name: PHP-CS-Fixer
     runs-on: ubuntu-latest
     container:
       image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
@@ -23,7 +23,7 @@ jobs:
       - name: Setup dependencies
         uses: ./.github/workflows/common/composer-install
 
-      - name: Check codestyle
+      - name: Run PHP-CS-Fixer
         run: composer phpcs-check
 
   phpstan:
@@ -53,7 +53,7 @@ jobs:
         with:
           run-scripts: true # Required to generate Symfony config cache files
 
-      - name: Analyse code
+      - name: Run PHPStan
         run: composer phpstan
 
   phpunit:
@@ -81,7 +81,7 @@ jobs:
           bin/console doctrine:schema:update --force --env=test
           bin/console doctrine:fixtures:load --no-interaction --group=test --env=test
 
-      - name: Run tests
+      - name: Run PHPUnit
         run: vendor/bin/phpunit --coverage-clover coverage.xml
 
       - name: Upload coverage reports to Codecov

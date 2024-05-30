@@ -13,6 +13,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
+        'date_time_immutable' => true,
         'declare_strict_types' => true,
         'no_useless_else' => true,
         'no_useless_return' => true,
