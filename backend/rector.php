@@ -26,7 +26,6 @@ return RectorConfig::configure()
         typeDeclarations: true,
         privatization: true,
         instanceOf: true,
-        earlyReturn: true,
         strictBooleans: true
     )
     ->withSets([

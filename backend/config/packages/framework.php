@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Symfony\Config\Framework\SessionConfig;
 use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $config): void {
@@ -11,7 +12,9 @@ return static function (FrameworkConfig $config): void {
         ->handleAllThrowables(true)
         ->phpErrors()->log();
 
-    $config->session()
+    /** @var SessionConfig $session */
+    $session = $config->session();
+    $session
         ->handlerId(null)
         ->cookieSecure('auto')
         ->cookieSamesite('lax');

@@ -6,13 +6,15 @@ namespace App\Tests\Functional\App\StudyProgramme\Port\Http;
 
 use App\StudyProgramme\Infrastructure\DataFixtures\Test\StudyProgrammeFixtures;
 use App\Tests\Test\WebDatabaseTestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 {
     public function testGetStudyProgrammes(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes');
-        self::assertResponseStatusCodeSame(200);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes');
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(4);
 
         $response = self::getJsonResponse();
@@ -40,8 +42,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 
     public function testGetStudyProgrammesWithTypeFilter(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes?filters[type]=BACHELOR');
-        self::assertResponseStatusCodeSame(200);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes?filters[type]=BACHELOR');
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(4);
 
         $response = self::getJsonResponse();
@@ -50,7 +52,7 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
         self::assertSame('018c4a1b-aee5-7999-a84e-fa116e82ed8a', $response['_embedded'][1]['id']);
 
         self::$client->enableProfiler();
-        $this->makeJsonRequest('GET', '/api/study-programmes?filters[type]=MASTER');
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes?filters[type]=MASTER');
         self::assertResponseStatusCodeSame(200);
         self::assertQueryCount(4);
 
@@ -61,8 +63,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 
     public function testGetStudyProgrammesWithSortAndOrder(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes?sort=type&order=desc');
-        self::assertResponseStatusCodeSame(200);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes?sort=type&order=desc');
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(4);
 
         $response = self::getJsonResponse();
@@ -74,8 +76,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 
     public function testGetStudyProgrammesWithPagination(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes?page=2&limit=1');
-        self::assertResponseStatusCodeSame(200);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes?page=2&limit=1');
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(4);
 
         $response = self::getJsonResponse();
@@ -90,8 +92,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 
     public function testGetStudyProgramme(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID);
-        self::assertResponseStatusCodeSame(200);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID);
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(3);
 
         $response = self::getJsonResponse();
@@ -110,8 +112,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
 
     public function testGetNotExistingStudyProgramme(): void
     {
-        $this->makeJsonRequest('GET', '/api/study-programmes/some-random-string');
-        self::assertResponseStatusCodeSame(404);
+        $this->makeJsonRequest(Request::METHOD_GET, '/api/study-programmes/some-random-string');
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
         self::assertQueryCount(2);
     }
 
@@ -119,8 +121,8 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
     {
         $data = $this->getData();
 
-        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
-        self::assertResponseStatusCodeSame(201);
+        $this->makeJsonRequest(Request::METHOD_POST, '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(Response::HTTP_CREATED);
         self::assertQueryCount(7);
 
         $response = self::getJsonResponse();
@@ -135,13 +137,13 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
     {
         $data = $this->getData();
 
-        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
-        self::assertResponseStatusCodeSame(201);
+        $this->makeJsonRequest(Request::METHOD_POST, '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(Response::HTTP_CREATED);
         self::assertQueryCount(7);
 
         self::$client->enableProfiler();
-        $this->makeJsonRequest('POST', '/api/study-programmes/create', $data);
-        self::assertResponseStatusCodeSame(422);
+        $this->makeJsonRequest(Request::METHOD_POST, '/api/study-programmes/create', $data);
+        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         self::assertQueryCount(4);
 
         $response = self::getJsonResponse();
@@ -157,11 +159,11 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
         $data = $this->getData();
 
         $this->makeJsonRequest(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID.'/update',
             data: $data
         );
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         self::assertQueryCount(8);
 
         $response = self::getJsonResponse();
@@ -178,11 +180,11 @@ final class StudyProgrammeControllerTest extends WebDatabaseTestCase
         $data['code'] = StudyProgrammeFixtures::getData()[StudyProgrammeFixtures::STUDY_PROGRAMME_2_ID]['code'];
 
         $this->makeJsonRequest(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/api/study-programmes/'.StudyProgrammeFixtures::STUDY_PROGRAMME_1_ID.'/update',
             data: $data
         );
-        self::assertResponseStatusCodeSame(422);
+        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         self::assertQueryCount(5);
 
         $response = self::getJsonResponse();

@@ -4,19 +4,13 @@ declare(strict_types=1);
 
 namespace Framework\Port\Http;
 
-use Nelmio\ApiDocBundle\PropertyDescriber\NullablePropertyTrait;
 use Nelmio\ApiDocBundle\PropertyDescriber\PropertyDescriberInterface;
 use OpenApi\Annotations\Schema;
 use Symfony\Component\Uid\Uuid;
 
 final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
 {
-    // Ignore deprecation until https://github.com/nelmio/NelmioApiDocBundle/pull/2098 is merged
-    // @phpstan-ignore-next-line
-    use NullablePropertyTrait;
-
     /**
-     * @param string[]|null        $groups
      * @param array<string, mixed> $context
      */
     #[\Override]
@@ -28,7 +22,7 @@ final readonly class UuidPropertyDescriber implements PropertyDescriberInterface
         array $context = []
     ): void {
         $property->type = 'string';
-        $this->setNullableProperty($types[0], $property, $schema);
+        $property->format = 'uuid';
     }
 
     #[\Override]
