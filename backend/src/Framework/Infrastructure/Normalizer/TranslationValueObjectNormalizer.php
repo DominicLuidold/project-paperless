@@ -20,9 +20,6 @@ final readonly class TranslationValueObjectNormalizer implements NormalizerInter
         return $object->getValues();
     }
 
-    /**
-     * @param array<mixed> $context
-     */
     #[\Override]
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {

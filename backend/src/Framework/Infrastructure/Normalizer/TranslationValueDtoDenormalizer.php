@@ -15,9 +15,6 @@ final readonly class TranslationValueDtoDenormalizer implements DenormalizerInte
         return new TranslationValueDto($data);
     }
 
-    /**
-     * @param array<mixed> $context
-     */
     #[\Override]
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {

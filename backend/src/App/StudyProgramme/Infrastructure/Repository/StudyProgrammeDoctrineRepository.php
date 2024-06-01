@@ -9,11 +9,10 @@ use App\StudyProgramme\Domain\Model\StudyProgramme\StudyProgramme;
 use App\StudyProgramme\Domain\Repository\StudyProgrammeRepositoryFilter;
 use App\StudyProgramme\Domain\Repository\StudyProgrammeRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Framework\Infrastructure\Repository\Doctrine\RepositoryTrait;
 use Framework\Infrastructure\Repository\QueryOptions;
-use Framework\Infrastructure\Repository\RepositoryTrait;
 
 /**
  * @extends ServiceEntityRepository<StudyProgramme>
@@ -50,17 +49,21 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
     }
 
     #[\Override]
-    public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array
-    {
+    public function findByFilter(
+        StudyProgrammeRepositoryFilter $filter = new StudyProgrammeRepositoryFilter(),
+        QueryOptions $options = new QueryOptions()
+    ): array {
         $qb = $this->createQueryBuilder('studyProgramme')
-            ->orderBy('studyProgramme.'.$options->sort, $options->order)
             ->setFirstResult($options->offset)
             ->setMaxResults($options->limit);
 
-        $this->handleFilters($qb, $filter);
-        $paginator = new Paginator($qb);
+        $qb = (new StudyProgrammeDoctrineQueryFilter())
+            ->setType($filter->type)
+            ->setSort($options->sort)
+            ->setOrder($options->order)
+            ->updateQueryBuilder($qb);
 
-        return iterator_to_array($paginator->getIterator());
+        return iterator_to_array((new Paginator($qb))->getIterator());
     }
 
     #[\Override]
@@ -69,16 +72,10 @@ final class StudyProgrammeDoctrineRepository extends ServiceEntityRepository imp
         $qb = $this->createQueryBuilder('studyProgramme')
             ->select('COUNT(studyProgramme.id)');
 
-        $this->handleFilters($qb, $filter);
+        $qb = (new StudyProgrammeDoctrineQueryFilter())
+            ->setType($filter->type)
+            ->updateQueryBuilder($qb);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    private function handleFilters(QueryBuilder $qb, StudyProgrammeRepositoryFilter $filter): void
-    {
-        if (null !== $type = $filter->type) {
-            $qb->andWhere('studyProgramme.type = :type')
-                ->setParameter('type', $type);
-        }
     }
 }

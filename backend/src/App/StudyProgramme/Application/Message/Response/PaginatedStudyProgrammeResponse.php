@@ -23,7 +23,7 @@ final readonly class PaginatedStudyProgrammeResponse extends PaginatedResponse
     }
 
     /**
-     * @return array<StudyProgrammeResponse>
+     * @return StudyProgrammeResponse[]
      */
     #[\Override]
     public function getEmbeddedData(): array

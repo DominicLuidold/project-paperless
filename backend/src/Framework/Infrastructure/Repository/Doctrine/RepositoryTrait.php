@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Infrastructure\Repository;
+namespace Framework\Infrastructure\Repository\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Fusonic\DDDExtensions\Domain\Model\EntityInterface;

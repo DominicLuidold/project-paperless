@@ -24,7 +24,7 @@ final readonly class GetAllStudyProgrammesQueryHandler implements QueryHandlerIn
     {
         $filter = new StudyProgrammeRepositoryFilter(type: $query->filters->type);
 
-        $studyProgrammes = $this->studyProgrammeRepository->findAllByFilter(
+        $studyProgrammes = $this->studyProgrammeRepository->findByFilter(
             filter: $filter,
             options: new QueryOptions(
                 offset: $query->offset(),

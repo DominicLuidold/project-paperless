@@ -25,7 +25,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
     /**
      * @var StudyProgramme[]
      */
-    private array $findAllByFilterResults = [];
+    private array $findByFilterResults = [];
 
     private int $countByFilterResult = 0;
 
@@ -64,9 +64,11 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
     }
 
     #[\Override]
-    public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array
-    {
-        return $this->findAllByFilterResults;
+    public function findByFilter(
+        StudyProgrammeRepositoryFilter $filter = new StudyProgrammeRepositoryFilter(),
+        QueryOptions $options = new QueryOptions()
+    ): array {
+        return $this->findByFilterResults;
     }
 
     /**
@@ -74,7 +76,7 @@ final class FakeStudyProgrammeRepository implements StudyProgrammeRepositoryInte
      */
     public function withFindByFilterResults(array $studyProgrammes): self
     {
-        $this->findAllByFilterResults = $studyProgrammes;
+        $this->findByFilterResults = $studyProgrammes;
 
         return $this;
     }

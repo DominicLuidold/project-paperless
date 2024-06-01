@@ -17,7 +17,10 @@ interface StudyProgrammeRepositoryInterface
     /**
      * @return StudyProgramme[]
      */
-    public function findAllByFilter(StudyProgrammeRepositoryFilter $filter, QueryOptions $options): array;
+    public function findByFilter(
+        StudyProgrammeRepositoryFilter $filter = new StudyProgrammeRepositoryFilter(),
+        QueryOptions $options = new QueryOptions()
+    ): array;
 
     public function countWithFilter(StudyProgrammeRepositoryFilter $filter): int;
 

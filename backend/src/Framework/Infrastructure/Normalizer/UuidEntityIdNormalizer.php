@@ -20,9 +20,6 @@ final readonly class UuidEntityIdNormalizer implements NormalizerInterface, Deno
         return $object->getValue()->toRfc4122();
     }
 
-    /**
-     * @param array<mixed> $context
-     */
     #[\Override]
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
@@ -38,9 +35,6 @@ final readonly class UuidEntityIdNormalizer implements NormalizerInterface, Deno
         return $id;
     }
 
-    /**
-     * @param array<mixed> $context
-     */
     #[\Override]
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
