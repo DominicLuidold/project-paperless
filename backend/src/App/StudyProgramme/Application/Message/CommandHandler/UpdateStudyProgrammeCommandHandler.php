@@ -28,13 +28,10 @@ final readonly class UpdateStudyProgrammeCommandHandler implements CommandHandle
             throw NotFoundException::default(StudyProgramme::class, $command->id);
         }
 
-        $studyProgramme->update(
-            name: TranslationValueObject::create($command->name->values),
-            type: $command->type,
-            numberOfSemesters: $command->numberOfSemesters,
-            code: $command->code,
-            uniqueStudyProgrammeCodeChecker: $this->uniqueStudyProgrammeCodeChecker
-        );
+        $studyProgramme->setName(TranslationValueObject::create($command->name->values));
+        $studyProgramme->setType($command->type);
+        $studyProgramme->setNumberOfSemesters($command->numberOfSemesters);
+        $studyProgramme->updateCode($command->code, $this->uniqueStudyProgrammeCodeChecker);
 
         return StudyProgrammeResponse::fromEntity($studyProgramme);
     }

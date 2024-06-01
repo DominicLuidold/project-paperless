@@ -43,23 +43,6 @@ class StudyProgramme extends AggregateRoot
         );
     }
 
-    public function update(
-        TranslationValueObject $name,
-        StudyProgrammeType $type,
-        int $numberOfSemesters,
-        string $code,
-        UniqueStudyProgrammeCodeCheckerInterface $uniqueStudyProgrammeCodeChecker,
-    ): void {
-        if ($code !== $this->code) {
-            $uniqueStudyProgrammeCodeChecker->checkUniqueStudyProgrammeCode($code);
-        }
-
-        $this->name = $name;
-        $this->type = $type;
-        $this->numberOfSemesters = $numberOfSemesters;
-        $this->code = $code;
-    }
-
     #[\Override]
     public function getId(): StudyProgrammeId
     {
@@ -71,9 +54,19 @@ class StudyProgramme extends AggregateRoot
         return $this->name;
     }
 
+    public function setName(TranslationValueObject $name): void
+    {
+        $this->name = $name;
+    }
+
     public function getType(): StudyProgrammeType
     {
         return $this->type;
+    }
+
+    public function setType(StudyProgrammeType $type): void
+    {
+        $this->type = $type;
     }
 
     public function getNumberOfSemesters(): int
@@ -81,8 +74,24 @@ class StudyProgramme extends AggregateRoot
         return $this->numberOfSemesters;
     }
 
+    public function setNumberOfSemesters(int $numberOfSemesters): void
+    {
+        $this->numberOfSemesters = $numberOfSemesters;
+    }
+
     public function getCode(): string
     {
         return $this->code;
+    }
+
+    public function updateCode(
+        string $code,
+        UniqueStudyProgrammeCodeCheckerInterface $uniqueStudyProgrammeCodeChecker
+    ): void {
+        if ($code !== $this->code) {
+            $uniqueStudyProgrammeCodeChecker->checkUniqueStudyProgrammeCode($code);
+        }
+
+        $this->code = $code;
     }
 }
