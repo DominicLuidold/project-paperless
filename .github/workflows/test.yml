@@ -56,6 +56,27 @@ jobs:
       - name: Run PHPStan
         run: composer phpstan
 
+  rector:
+    name: Rector
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.CI_IMAGE }}:php-${{ vars.PHP_VERSION }}
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup dependencies
+        uses: ./.github/workflows/common/composer-install
+        with:
+          run-scripts: true # Required to generate Symfony config cache files
+
+      - name: Run Rector
+        run: composer rector -- --dry-run
+
   phpunit:
     name: PHPUnit
     runs-on: ubuntu-latest
