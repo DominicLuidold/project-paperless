@@ -17,7 +17,7 @@ return RectorConfig::configure()
         __DIR__.'/src',
         __DIR__.'/tests',
     ])
-    ->withPHPStanConfigs([__DIR__.'/phpstan.dist.neon'])
+    ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
     ->withSymfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml')
     ->withPhpSets(php83: true)
     ->withPreparedSets(

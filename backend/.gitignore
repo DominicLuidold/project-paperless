@@ -13,7 +13,6 @@
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
-/.php-cs-fixer.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 
@@ -22,7 +21,3 @@
 /.phpunit.cache
 /phpunit.xml
 ###< phpunit/phpunit ###
-
-###> phpstan/phpstan ###
-/phpstan.neon
-###< phpstan/phpstan ###
