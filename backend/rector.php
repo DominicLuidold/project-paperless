@@ -2,50 +2,55 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\Config\RectorConfig;
+use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
-use Rector\Symfony\Set\SymfonyLevelSetList;
 use Rector\Symfony\Set\SymfonySetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__.'/config',
         __DIR__.'/public',
         __DIR__.'/src',
         __DIR__.'/tests',
-    ]);
-
-    $rectorConfig->phpstanConfigs([
-        __DIR__.'/phpstan.dist.neon',
-        // Rector does not load PHPStan extensions automatically
-        __DIR__.'/vendor/phpstan/phpstan-doctrine/extension.neon',
-        __DIR__.'/vendor/phpstan/phpstan-phpunit/extension.neon',
-        __DIR__.'/vendor/phpstan/phpstan-symfony/extension.neon',
-        __DIR__.'/vendor/tomasvotruba/type-coverage/config/extension.neon',
-    ]);
-
-    $rectorConfig->sets([
-        // PHP
-        LevelSetList::UP_TO_PHP_83,
-        SetList::CODE_QUALITY,
-        SetList::PRIVATIZATION,
-        SetList::TYPE_DECLARATION,
-
+    ])
+    ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
+    ->withSymfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml')
+    ->withPhpSets(php83: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        strictBooleans: true
+    )
+    ->withSets([
         // Symfony
-        SymfonyLevelSetList::UP_TO_SYMFONY_63,
-        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::SYMFONY_64,
+        SymfonySetList::CONFIGS,
         SymfonySetList::SYMFONY_CODE_QUALITY,
+        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
+
+        // Doctrine
+        DoctrineSetList::DOCTRINE_BUNDLE_210,
+        DoctrineSetList::DOCTRINE_ORM_214,
+        DoctrineSetList::DOCTRINE_DBAL_40,
+        DoctrineSetList::DOCTRINE_CODE_QUALITY,
 
         // PHPUnit
-        PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
+        PHPUnitSetList::PHPUNIT_100,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-    ]);
-
-    $rectorConfig->skip([
+    ])
+    ->withSkip([
+        CallableThisArrayToAnonymousFunctionRector::class => [
+            // 'set_exception_handler' must be called with the array syntax to not cause errors in PHPUnit >= 11.0.
+            // Remove when https://github.com/symfony/symfony/issues/53812 is fixed
+            __DIR__.'/tests/bootstrap.php',
+        ],
+        FlipTypeControlToUseExclusiveTypeRector::class,
         PreferPHPUnitThisCallRector::class,
     ]);
-};

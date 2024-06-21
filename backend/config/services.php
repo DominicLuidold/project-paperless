@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Framework\Application\Messenger\CommandHandlerInterface;
-use Framework\Application\Messenger\EventHandlerInterface;
-use Framework\Application\Messenger\QueryHandlerInterface;
+use Framework\Application\Message\CommandHandlerInterface;
+use Framework\Application\Message\EventHandlerInterface;
+use Framework\Application\Message\QueryHandlerInterface;
 use Fusonic\DDDExtensions\Doctrine\LifecycleListener\DomainEventLifecycleListener;
 
 return static function (ContainerConfigurator $container): void {

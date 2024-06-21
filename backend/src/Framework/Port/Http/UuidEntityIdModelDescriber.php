@@ -12,6 +12,7 @@ use Symfony\Component\PropertyInfo\Type;
 
 final readonly class UuidEntityIdModelDescriber implements ModelDescriberInterface
 {
+    #[\Override]
     public function describe(Model $model, Schema $schema): void
     {
         $type = $model->getType();
@@ -24,6 +25,7 @@ final readonly class UuidEntityIdModelDescriber implements ModelDescriberInterfa
         }
     }
 
+    #[\Override]
     public function supports(Model $model): bool
     {
         $type = $model->getType();

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Symfony\Config\Framework\Messenger\TransportConfig;
 use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $framework): void {
@@ -10,11 +11,15 @@ return static function (FrameworkConfig $framework): void {
     $messenger->defaultBus('event.bus')
         ->failureTransport('failed');
 
-    $messenger->transport('sync')
-        ->dsn('sync://');
+    /** @var TransportConfig $syncTransport */
+    $syncTransport = $messenger->transport('sync');
+    $syncTransport->dsn('sync://');
 
-    $messenger->transport('async')
+    /** @var TransportConfig $asyncTransport */
+    $asyncTransport = $messenger->transport('async');
+    $asyncTransport
         ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+        // @phpstan-ignore argument.type (based on Symfony documentation examples)
         ->options(['queue_name' => 'async', 'auto_setup' => false])
         ->retryStrategy()
             ->maxRetries(3)
@@ -22,8 +27,11 @@ return static function (FrameworkConfig $framework): void {
             ->maxDelay(0)
             ->multiplier(10);
 
-    $messenger->transport('failed')
+    /** @var TransportConfig $failedTransport */
+    $failedTransport = $messenger->transport('failed');
+    $failedTransport
         ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+        // @phpstan-ignore argument.type (based on Symfony documentation examples)
         ->options(['queue_name' => 'failed', 'auto_setup' => false]);
 
     $commandBus = $messenger->bus('command.bus');

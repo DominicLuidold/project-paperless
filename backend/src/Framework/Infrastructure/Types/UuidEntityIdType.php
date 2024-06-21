@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Framework\Infrastructure\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\Type;
 use Framework\Domain\Id\UuidEntityId;
 use Symfony\Bridge\Doctrine\Types\AbstractUidType;
@@ -22,22 +23,24 @@ abstract class UuidEntityIdType extends Type
      */
     abstract protected function getTypeClass(): string;
 
+    #[\Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         if ($this->hasNativeGuidType($platform)) {
             return $platform->getGuidTypeDeclarationSQL($column);
         }
 
-        return $platform->getBinaryTypeDeclarationSQL([
+        return $platform->getStringTypeDeclarationSQL([
             'length' => 16,
             'fixed' => true,
         ]);
     }
 
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if ($value instanceof UuidEntityId) {
-            return $this->hasNativeGuidType($platform) ? $value->getValue()->toRfc4122() : $value->getValue()->toBinary();
+            return $value->getValue()->toRfc4122();
         }
 
         if (!\is_string($value)) {
@@ -57,6 +60,7 @@ abstract class UuidEntityIdType extends Type
         }
     }
 
+    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): UuidEntityId
     {
         $typeClass = $this->getTypeClass();
@@ -84,27 +88,21 @@ abstract class UuidEntityIdType extends Type
         }
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        // Add comment to prevent Doctrine from always detecting changes that need to be applied to the schema.
-        return true;
-    }
-
     private function hasNativeGuidType(AbstractPlatform $platform): bool
     {
         // Compatibility with DBAL < 3.4
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore function.alreadyNarrowedType
         $method = method_exists($platform, 'getStringTypeDeclarationSQL')
             ? 'getStringTypeDeclarationSQL'
             : 'getVarcharTypeDeclarationSQL';
 
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore method.dynamicName
         return $platform->getGuidTypeDeclarationSQL([]) !== $platform->$method(['fixed' => true, 'length' => 36]);
     }
 
     private function throwInvalidType(mixed $value): never
     {
-        throw ConversionException::conversionFailedInvalidType(
+        throw InvalidType::new(
             value: $value,
             toType: self::getTypeRegistry()->lookupName($this),
             possibleTypes: ['null', 'string', Uuid::class]
@@ -113,7 +111,7 @@ abstract class UuidEntityIdType extends Type
 
     private function throwValueNotConvertible(mixed $value, \Throwable $previous): never
     {
-        throw ConversionException::conversionFailed(
+        throw ValueNotConvertible::new(
             value: $value,
             toType: self::getTypeRegistry()->lookupName($this),
             previous: $previous
